@@ -1,0 +1,379 @@
+"use client";
+
+import React, { useEffect, useState, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+
+// --- News Pile Data & Logic ---
+interface Article {
+  id: number;
+  title: string;
+  src: string;
+  rotation: number;
+  x: number;
+  y: number;
+  scale: number;
+  zIndex: number;
+}
+
+const ARTICLE_DATA = [
+  { title: "New Coke", src: "/articles/newcoke.png", scale: 1.45 },
+  { title: "Garde-Robe Campaign (Balenciaga)", src: "/articles/balenciaga-garde.png", scale: 1.4 },
+  { title: "Nivea 'White is Purity' Deodorant (2017)", src: "/articles/nivea.png", scale: 1.35 },
+  { title: "Heineken 'Sometimes, Lighter is Better' (2017)", src: "/articles/heineken.png", scale: 1.4 },
+  { title: "Bud Light/Dylan Mulvaney (2023)", src: "/articles/budlight.png", scale: 1.45 },
+  { title: "Pepsi/Kendall Jenner (2017)", src: "/articles/pepsi.png", scale: 1.35 },
+  { title: "Gillette 'Best a Man Can Be'", src: "/articles/gillette.png", scale: 1.5 },
+];
+
+// Deterministic layout configuration to ensure headers are visible (cascading Y) and messy look (random-ish X/Rotation)
+// Increased Y spacing to ~100px to reveal headlines.
+const DETERMINISTIC_LAYOUT = [
+  { x: -140, y: -220, r: -6 },
+  { x: 120, y: -190, r: 4 },
+  { x: -130, y: -100, r: -3 },
+  { x: 140, y: -10, r: 5 },
+  { x: -120, y: 80, r: -4 },
+  { x: 130, y: 170, r: 3 },
+  { x: -140, y: 260, r: -5 },
+];
+
+function generateDeterministicArticle(id: number, articleData: { title: string; src: string; scale?: number }, containerWidth: number, containerHeight: number): Article {
+  const layout = DETERMINISTIC_LAYOUT[id % DETERMINISTIC_LAYOUT.length];
+
+  const isMobile = containerWidth < 768;
+
+  // Scale logic
+  const mobileScale = 0.65;
+  const scale = isMobile ? (articleData.scale ? articleData.scale * 0.4 : mobileScale) : (articleData.scale || 2);
+
+  const centerX = containerWidth / 2;
+  const centerY = containerHeight / 2;
+
+  // Base card width approximation for centering logic
+  const cardBaseW = 300;
+
+  // Apply responsive spacing
+  // Tighter spread on mobile
+  const xMult = isMobile ? 0.5 : 1.2;
+  const yMult = isMobile ? 0.6 : 1.0;
+
+  const x = centerX - (cardBaseW / 2) + (layout.x * xMult);
+  const y = centerY - 100 + (layout.y * yMult); // Start slightly higher than center
+
+  return {
+    id,
+    title: articleData.title,
+    src: articleData.src,
+    rotation: layout.r,
+    x,
+    y,
+    scale,
+    zIndex: id,
+  };
+}
+
+const Hero: React.FC = () => {
+  // 0: Title, 1: Pile, 2: Title Addon, 3: Subtitle, 4: CTA, 5: Trusted By -> 6: Unlocked
+  const [step, setStep] = useState(0);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [articles, setArticles] = useState<Article[]>([]);
+  const [visibleArticles, setVisibleArticles] = useState<Article[]>([]);
+  const [pileIndex, setPileIndex] = useState(0);
+
+  // Ref to track if we are currently manually scrolling to debounce or throttle
+  const lastScrollTime = useRef(0);
+
+  // --- Animation Sequence Timers ---
+  useEffect(() => {
+    let timer: NodeJS.Timeout;
+
+    if (step === 0) {
+      // Auto-start pile after title
+      timer = setTimeout(() => setStep(1), 500);
+    }
+    else if (step === 1) {
+      // Pile logic handled separately via pileIndex
+    }
+    else if (step === 2) {
+      // Showing Title Addon ("Derisk It In Minutes") -> Wait then show Subtitle
+      timer = setTimeout(() => setStep(3), 1500);
+    }
+    else if (step === 3) {
+      // Showing Subtitle -> Wait then show CTA
+      timer = setTimeout(() => setStep(4), 1500);
+    }
+    else if (step === 4) {
+      // Show Trusted By shortly after CTA
+      timer = setTimeout(() => setStep(5), 1000);
+    }
+    else if (step === 5) {
+      // Fully unlock after a beat
+      timer = setTimeout(() => setStep(6), 500);
+    }
+
+    return () => clearTimeout(timer);
+  }, [step]);
+
+
+  // --- Pile Auto-Advance ---
+  useEffect(() => {
+    if (step === 1) {
+      const interval = setInterval(() => {
+        setPileIndex(prev => {
+          if (prev >= articles.length) {
+            clearInterval(interval);
+            return prev;
+          }
+          return prev + 1;
+        });
+      }, 300); // Speed per card
+      return () => clearInterval(interval);
+    }
+  }, [step, articles.length]);
+
+  // Sync Pile Index to Visible Articles
+  useEffect(() => {
+    if (pileIndex > 0 && articles.length > 0) {
+      // Add articles up to current index
+      if (pileIndex <= articles.length) {
+        setVisibleArticles(articles.slice(0, pileIndex));
+      }
+      if (pileIndex >= articles.length) {
+        // Pile finished
+        setTimeout(() => setStep(2), 500);
+      }
+    }
+  }, [pileIndex, articles]);
+
+
+  // --- Layout Generation ---
+  useEffect(() => {
+    if (!containerRef.current) return;
+    const updateLayout = () => {
+      if (!containerRef.current) return;
+      const width = containerRef.current.clientWidth;
+      const height = containerRef.current.clientHeight;
+      const all = ARTICLE_DATA.map((d, i) => generateDeterministicArticle(i, d, width, height));
+      setArticles(all);
+    };
+
+    updateLayout();
+    window.addEventListener('resize', updateLayout);
+    return () => window.removeEventListener('resize', updateLayout);
+  }, []);
+
+  // --- Scroll Locking & Interaction ---
+  useEffect(() => {
+    const handleWheel = (e: WheelEvent) => {
+      if (step >= 6) return; // Allow normal scroll
+
+      e.preventDefault();
+
+      const now = Date.now();
+      // Simple throttle for step changes
+      if (now - lastScrollTime.current < 100) return;
+      lastScrollTime.current = now;
+
+      // Logic: Scroll acts as a "Fast Forward" button
+      if (e.deltaY > 0) { // Scrolling DOWN
+        if (step === 1) {
+          // Speed up pile: add next card immediately
+          setPileIndex(prev => Math.min(prev + 1, articles.length));
+        } else if (step === 2) {
+          setStep(3);
+        } else if (step === 3) {
+          setStep(4);
+        } else if (step === 4) {
+          setStep(5);
+        } else if (step === 5) {
+          setStep(6);
+        }
+      }
+    };
+
+    // Mobile Touch Logic
+    let touchStartY = 0;
+    const handleTouchStart = (e: TouchEvent) => {
+      touchStartY = e.touches[0].clientY;
+    };
+    const handleTouchMove = (e: TouchEvent) => {
+      if (step >= 6) return;
+      e.preventDefault(); // Lock scroll
+
+      const currentY = e.touches[0].clientY;
+      const diff = touchStartY - currentY;
+
+      if (diff > 10) { // Swipe UP (scroll down)
+        const now = Date.now();
+        if (now - lastScrollTime.current < 150) return;
+        lastScrollTime.current = now;
+
+        if (step === 1) {
+          setPileIndex(prev => Math.min(prev + 1, articles.length));
+        } else if (step < 6) {
+          setStep(prev => prev + 1);
+        }
+      }
+    };
+
+    // Lock body scroll logic
+    if (step < 6) {
+      document.body.style.overflow = "hidden";
+      window.addEventListener("wheel", handleWheel, { passive: false });
+      window.addEventListener("touchstart", handleTouchStart, { passive: false });
+      window.addEventListener("touchmove", handleTouchMove, { passive: false });
+    } else {
+      document.body.style.overflow = "";
+    }
+
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("wheel", handleWheel);
+      window.removeEventListener("touchstart", handleTouchStart);
+      window.removeEventListener("touchmove", handleTouchMove);
+    };
+  }, [step, articles.length]);
+
+
+  return (
+    <section className="relative w-full min-h-[95vh] flex items-center bg-transparent text-[#0f1a1f] pt-24 md:pt-20 overflow-hidden">
+      <div className="w-full max-w-[99%] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-y-0 lg:gap-0 items-center h-full min-h-[80vh]">
+
+        {/* Left Column: Text & CTA */}
+        <div className="contents lg:flex lg:flex-col justify-center space-y-4 z-20 relative">
+
+          {/* Main Headline */}
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="mt-2 text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-black leading-[0.9] tracking-tighter text-black order-1 lg:order-none mb-0 lg:mb-2 whitespace-nowrap"
+          >
+            Brand Spend Is High Stakes.
+
+            {step >= 2 && (
+              <motion.span initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: "auto" }}
+                transition={{ duration: 0.5 }}
+                className="block text-[#236a7c] text-4xl md:text-6xl lg:text-7xl xl:text-8xl whitespace-nowrap"
+              >
+                Derisk It In Minutes.
+              </motion.span>
+            )}
+          </motion.h1>
+
+          {/* Subtitle & CTA Wrapper */}
+          <div className="order-3 lg:order-none flex flex-col gap-8 md:gap-4 w-full mt-24 lg:mt-12">
+            <div className="h-28 md:h-40 relative flex items-start">
+              {step >= 3 && (
+                <motion.p
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5 }}
+                  className="text-xl sm:text-2xl md:text-xl lg:text-xl xl:text-2xl font-medium text-[#334155] whitespace-normal md:whitespace-nowrap leading-snug tracking-tight max-w-[90%] md:max-w-none"
+                >
+                  Test any brand decision against <br className="block md:hidden" />your customers before launch
+                </motion.p>
+              )}
+            </div>
+
+            {/* CTA Buttons & Trusted By */}
+            <div
+              className={`flex flex-col gap-8 transition-opacity duration-1000 ${step < 4 ? "pointer-events-none" : ""}`}
+              style={{ opacity: step >= 4 ? 1 : 0 }}
+            >
+              <div>
+                <a
+                  href="#contact"
+                  className="inline-flex items-center justify-center px-10 py-6 text-xl font-bold rounded-xl text-white bg-gradient-to-r from-[#236a7c] to-[#1e5b6d] hover:from-[#1e5b6d] hover:to-[#164656] transition-all duration-300 transform hover:scale-[1.02] shadow-lg hover:shadow-xl"
+                >
+                  Book a Demo to See How
+                </a>
+              </div>
+
+              {/* Trusted By Section */}
+              <div
+                className="pt-4 border-t border-border w-full max-w-xl transition-opacity duration-1000"
+                style={{ opacity: step >= 5 ? 1 : 0 }}
+              >
+                <p className="text-[#334155]/80 text-sm font-bold uppercase tracking-widest mb-4">
+                  Trusted by top brand teams
+                </p>
+
+                <div className="relative w-full overflow-hidden [mask-image:linear-gradient(to_right,black_70%,transparent)]">
+                  <div className="animate-marquee whitespace-nowrap flex gap-16 items-center w-max">
+                    {["/companyLogos/nysom.png", "/companyLogos/rootLabs.png", "/companyLogos/gbk.png"]
+                      .concat(["/companyLogos/nysom.png", "/companyLogos/rootLabs.png", "/companyLogos/gbk.png"])
+                      .concat(["/companyLogos/nysom.png", "/companyLogos/rootLabs.png", "/companyLogos/gbk.png"])
+                      .concat(["/companyLogos/nysom.png", "/companyLogos/rootLabs.png", "/companyLogos/gbk.png"])
+                      .map((src, index) => {
+                        const isLarge = src.includes("gbk");
+                        return (
+                          <img
+                            key={index}
+                            src={src}
+                            alt="Brand Logo"
+                            className={`${isLarge ? "h-24 md:h-28" : "h-12 md:h-14"} object-contain inline-block shrink-0`}
+                          />
+                        );
+                      })}
+                  </div>
+                </div>
+                <style jsx>{`
+                    @keyframes marquee {
+                      0% { transform: translateX(0); }
+                      100% { transform: translateX(-50%); }
+                    }
+                    .animate-marquee {
+                      display: flex;
+                      animation: marquee 30s linear infinite;
+                    }
+                  `}</style>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Right Column: Pile Animation */}
+        <div className="relative h-[400px] md:h-[500px] lg:h-full lg:min-h-[90vh] w-full flex items-center justify-center lg:justify-end overflow-visible order-2 lg:order-last pointer-events-none">
+          <div ref={containerRef} className="relative w-full h-full lg:w-[120%] lg:-mr-[20%]">
+            <AnimatePresence>
+              {visibleArticles.map((article) => {
+                if (!article) return null;
+                return (
+                  <motion.div
+                    key={article.id}
+                    initial={{ scale: 0, opacity: 0, y: 50, x: article.x }}
+                    animate={{
+                      scale: article.scale,
+                      opacity: 1,
+                      y: 0,
+                      rotate: article.rotation,
+                      x: article.x,
+                      top: article.y
+                    }}
+                    transition={{
+                      type: "spring",
+                      stiffness: 260,
+                      damping: 18
+                    }}
+                    className="absolute shadow-2xl rounded-lg overflow-hidden bg-white border border-border"
+                    style={{
+                      width: '300px',
+                      zIndex: article.zIndex,
+                    }}
+                  >
+                    <img src={article.src} alt={article.title} className="w-full h-auto object-cover" />
+                  </motion.div>
+                );
+              })}
+            </AnimatePresence>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  );
+};
+
+export default Hero;
