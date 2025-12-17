@@ -21,7 +21,7 @@ const StatsBanner: React.FC = () => {
                 <div className="text-center mb-16 max-w-4xl mx-auto">
                     <ScrollFadeUp yOffset={20} duration={0.8} delay={0.1}>
                         <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-[#b8dce7] tracking-tight leading-tight">
-                            <span className="text-white">no brainer</span> compared to traditional market research
+                            <span className="text-white">No brainer</span> compared to traditional market research
                         </h2>
                     </ScrollFadeUp>
                 </div>
