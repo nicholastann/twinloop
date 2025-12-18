@@ -34,17 +34,45 @@ const steps = [
   }
 ];
 
+const slideVariants = {
+  enter: (direction: number) => ({
+    x: direction > 0 ? 50 : -50,
+    opacity: 0,
+    scale: 0.95,
+  }),
+  center: {
+    zIndex: 1,
+    x: 0,
+    opacity: 1,
+    scale: 1,
+  },
+  exit: (direction: number) => ({
+    zIndex: 0,
+    x: direction < 0 ? 50 : -50,
+    opacity: 0,
+    scale: 0.95,
+  }),
+};
+
 const HowItWorksDisplay: React.FC = () => {
   const [activeStep, setActiveStep] = useState(0);
+  const [direction, setDirection] = useState(0);
 
-  const handleNext = () => setActiveStep((prev) => (prev + 1) % steps.length);
-  const handlePrev = () => setActiveStep((prev) => (prev - 1 + steps.length) % steps.length);
+  const handleNext = () => {
+    setDirection(1);
+    setActiveStep((prev) => (prev + 1) % steps.length);
+  };
+
+  const handlePrev = () => {
+    setDirection(-1);
+    setActiveStep((prev) => (prev - 1 + steps.length) % steps.length);
+  };
 
   // Auto-advance timer
   useEffect(() => {
     const timer = setInterval(() => {
-      setActiveStep((prev) => (prev + 1) % steps.length);
-    }, 5000); // 5 seconds
+      handleNext();
+    }, 10000); // 10 seconds
     return () => clearInterval(timer);
   }, []);
 
@@ -57,7 +85,10 @@ const HowItWorksDisplay: React.FC = () => {
           {steps.map((step, index) => (
             <button
               key={index}
-              onClick={() => setActiveStep(index)}
+              onClick={() => {
+                setDirection(index > activeStep ? 1 : -1);
+                setActiveStep(index);
+              }}
               className={`relative px-10 py-6 rounded-full text-base font-bold uppercase tracking-widest transition-all duration-500 overflow-hidden group mb-1 cursor-pointer ${activeStep === index
                 ? "text-white shadow-[0_10px_30px_rgba(35,106,124,0.3)] scale-105"
                 : "bg-white/50 text-[#334155] border border-white/60 hover:bg-white hover:scale-105"
@@ -79,7 +110,6 @@ const HowItWorksDisplay: React.FC = () => {
         </div>
 
         {/* Dynamic Display Area */}
-        {/* Dynamic Display Area */}
         <div className="relative">
           {/* Arrows (Mobile) */}
           <button onClick={handlePrev} className="md:hidden absolute left-0 top-[40%] -translate-y-1/2 z-30 p-2 text-[#236a7c]/50 hover:text-[#236a7c]"><FaChevronLeft size={24} /></button>
@@ -89,12 +119,14 @@ const HowItWorksDisplay: React.FC = () => {
 
             {/* Text Content with Framer Motion */}
             <div className="text-center lg:text-left order-1 lg:order-1 py-4 md:py-8">
-              <AnimatePresence mode="wait">
+              <AnimatePresence mode="wait" custom={direction} initial={false}>
                 <motion.div
                   key={activeStep}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: 20 }}
+                  custom={direction}
+                  variants={slideVariants}
+                  initial="enter"
+                  animate="center"
+                  exit="exit"
                   transition={{ duration: 0.4 }}
                   drag="x"
                   dragConstraints={{ left: 0, right: 0 }}
@@ -110,6 +142,7 @@ const HowItWorksDisplay: React.FC = () => {
                       {steps[activeStep].icon}
                     </div>
                     <h3 className="text-2xl md:text-5xl lg:text-6xl font-black text-[#0f172a] tracking-tight leading-tight text-center md:text-left">
+                      <span className="md:hidden">{activeStep + 1}. </span>
                       {steps[activeStep].title}
                     </h3>
                   </div>
@@ -127,14 +160,16 @@ const HowItWorksDisplay: React.FC = () => {
 
               <div className="relative w-full h-full bg-white/40 backdrop-blur-xl rounded-[3rem] border border-white/60 shadow-[0_30px_60px_rgba(0,0,0,0.05)] overflow-hidden p-8 group">
                 <div className="absolute inset-8 rounded-[2.5rem] overflow-hidden bg-[#f8fafc]">
-                  <AnimatePresence mode="wait">
+                  <AnimatePresence mode="wait" custom={direction} initial={false}>
                     <motion.img
                       key={activeStep}
+                      custom={direction}
+                      variants={slideVariants}
                       src={steps[activeStep].image}
                       alt={steps[activeStep].title}
-                      initial={{ scale: 1.1, opacity: 0 }}
-                      animate={{ scale: 1, opacity: 1 }}
-                      exit={{ scale: 1.05, opacity: 0 }}
+                      initial="enter"
+                      animate="center"
+                      exit="exit"
                       transition={{ duration: 0.6 }}
                       drag="x"
                       dragConstraints={{ left: 0, right: 0 }}

@@ -205,25 +205,28 @@ const USE_CASES = [
 
 const VennDiagramSection: React.FC = () => {
     const [activeIndex, setActiveIndex] = useState(0);
+    const [direction, setDirection] = useState(0);
+
+    const handleNext = () => {
+        setDirection(1);
+        setActiveIndex((prev) => (prev + 1) % USE_CASES.length);
+    };
+
+    const handlePrev = () => {
+        setDirection(-1);
+        setActiveIndex((prev) => (prev - 1 + USE_CASES.length) % USE_CASES.length);
+    };
 
     // Auto-advance timer
     useEffect(() => {
         const interval = setInterval(() => {
-            setActiveIndex((prev) => (prev + 1) % USE_CASES.length);
+            handleNext();
         }, 10000); // 10 seconds per slide
 
         return () => clearInterval(interval);
     }, [activeIndex]);
 
     const activeCase = USE_CASES[activeIndex];
-
-    const handlePrev = () => {
-        setActiveIndex((prev) => (prev - 1 + USE_CASES.length) % USE_CASES.length);
-    };
-
-    const handleNext = () => {
-        setActiveIndex((prev) => (prev + 1) % USE_CASES.length);
-    };
 
     const getCarouselStyles = (index: number) => {
         const total = USE_CASES.length;
@@ -243,10 +246,24 @@ const VennDiagramSection: React.FC = () => {
         };
     };
 
-    const contentVariants = {
-        enter: { opacity: 0, scale: 0.95 },
-        center: { opacity: 1, scale: 1 },
-        exit: { opacity: 0, scale: 0.95 },
+    const slideVariants = {
+        enter: (direction: number) => ({
+            x: direction > 0 ? 50 : -50,
+            opacity: 0,
+            scale: 0.95,
+        }),
+        center: {
+            zIndex: 1,
+            x: 0,
+            opacity: 1,
+            scale: 1,
+        },
+        exit: (direction: number) => ({
+            zIndex: 0,
+            x: direction < 0 ? 50 : -50,
+            opacity: 0,
+            scale: 0.95,
+        }),
     };
 
     return (
@@ -290,7 +307,10 @@ const VennDiagramSection: React.FC = () => {
                                     rotateY: styles.rotateY
                                 }}
                                 transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                                onClick={() => setActiveIndex(index)}
+                                onClick={() => {
+                                    setDirection(index > activeIndex ? 1 : -1);
+                                    setActiveIndex(index);
+                                }}
                             >
                                 <div
                                     className={`p-6 rounded-2xl shadow-xl text-4xl transition-colors duration-300 w-max ${index === activeIndex
@@ -318,12 +338,14 @@ const VennDiagramSection: React.FC = () => {
                         <h4 className="text-base font-black text-[#64748b] uppercase tracking-wider">Decisions you’re making</h4>
 
                         <div className="relative w-full h-[550px]">
-                            <AnimatePresence mode="wait">
+                            <AnimatePresence mode="wait" custom={direction} initial={false}>
                                 <motion.div
                                     key={activeIndex}
-                                    initial={{ opacity: 0, x: 50 }}
-                                    animate={{ opacity: 1, x: 0 }}
-                                    exit={{ opacity: 0, x: -50 }}
+                                    custom={direction}
+                                    variants={slideVariants}
+                                    initial="enter"
+                                    animate="center"
+                                    exit="exit"
                                     transition={{ duration: 0.3 }}
                                     drag="x"
                                     dragConstraints={{ left: 0, right: 0 }}
@@ -398,7 +420,10 @@ const VennDiagramSection: React.FC = () => {
                             {USE_CASES.map((_, i) => (
                                 <button
                                     key={i}
-                                    onClick={() => setActiveIndex(i)}
+                                    onClick={() => {
+                                        setDirection(i > activeIndex ? 1 : -1);
+                                        setActiveIndex(i);
+                                    }}
                                     className={`w-2 h-2 rounded-full transition-all ${i === activeIndex ? "bg-[#236a7c] w-6" : "bg-[#236a7c]/20"}`}
                                 />
                             ))}
@@ -422,12 +447,14 @@ const VennDiagramSection: React.FC = () => {
 
                         {/* Left Content (Decisions) */}
                         <div className="absolute left-[-20px] top-1/2 -translate-y-1/2 w-[680px] h-[680px] rounded-full z-20 pointer-events-none">
-                            <AnimatePresence mode="wait">
+                            <AnimatePresence mode="wait" custom={direction} initial={false}>
                                 <motion.div
                                     key={`left-${activeIndex}`}
-                                    initial={{ opacity: 0 }}
-                                    animate={{ opacity: 1 }}
-                                    exit={{ opacity: 0 }}
+                                    custom={direction}
+                                    variants={slideVariants}
+                                    initial="enter"
+                                    animate="center"
+                                    exit="exit"
                                     transition={{ duration: 0.3 }}
                                     className="relative w-full h-full"
                                 >
@@ -463,12 +490,14 @@ const VennDiagramSection: React.FC = () => {
 
                         {/* Right Content (Customers) */}
                         <div className="absolute right-[-20px] top-1/2 -translate-y-1/2 w-[680px] h-[680px] rounded-full z-20 pointer-events-none">
-                            <AnimatePresence mode="wait">
+                            <AnimatePresence mode="wait" custom={direction} initial={false}>
                                 <motion.div
                                     key={`right-${activeIndex}`}
-                                    initial={{ opacity: 0 }}
-                                    animate={{ opacity: 1 }}
-                                    exit={{ opacity: 0 }}
+                                    custom={direction}
+                                    variants={slideVariants}
+                                    initial="enter"
+                                    animate="center"
+                                    exit="exit"
                                     transition={{ duration: 0.3 }}
                                     className="relative w-full h-full"
                                 >
@@ -503,10 +532,11 @@ const VennDiagramSection: React.FC = () => {
 
                         {/* Intersection (Center) */}
                         <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[340px] z-30 text-center pointer-events-none">
-                            <AnimatePresence mode="wait">
+                            <AnimatePresence mode="wait" custom={direction} initial={false}>
                                 <motion.div
                                     key={`center-${activeIndex}`}
-                                    variants={contentVariants}
+                                    custom={direction}
+                                    variants={slideVariants}
                                     initial="enter"
                                     animate="center"
                                     exit="exit"

@@ -62,17 +62,38 @@ const caseStudies = [
     }
 ];
 
+const slideVariants = {
+    enter: (direction: number) => ({
+        x: direction > 0 ? 50 : -50,
+        opacity: 0,
+    }),
+    center: {
+        zIndex: 1,
+        x: 0,
+        opacity: 1,
+    },
+    exit: (direction: number) => ({
+        zIndex: 0,
+        x: direction < 0 ? 50 : -50,
+        opacity: 0,
+    }),
+};
+
 const UseCases: React.FC = () => {
     const [activeId, setActiveId] = useState(caseStudies[0].id);
+    const [direction, setDirection] = useState(0);
+
     const activeCase = caseStudies.find(c => c.id === activeId) || caseStudies[0];
     const currentIndex = caseStudies.findIndex(c => c.id === activeId);
 
     const handleNext = () => {
+        setDirection(1);
         const nextIndex = (currentIndex + 1) % caseStudies.length;
         setActiveId(caseStudies[nextIndex].id);
     };
 
     const handlePrev = () => {
+        setDirection(-1);
         const prevIndex = (currentIndex - 1 + caseStudies.length) % caseStudies.length;
         setActiveId(caseStudies[prevIndex].id);
     };
@@ -98,10 +119,13 @@ const UseCases: React.FC = () => {
                     {/* Menu / Selector Column */}
                     {/* Menu / Selector Column */}
                     <div className="hidden lg:flex lg:col-span-4 flex-col gap-6">
-                        {caseStudies.map((study) => (
+                        {caseStudies.map((study, index) => (
                             <button
                                 key={study.id}
-                                onClick={() => setActiveId(study.id)}
+                                onClick={() => {
+                                    setDirection(index > currentIndex ? 1 : -1);
+                                    setActiveId(study.id);
+                                }}
                                 className={`group relative p-6 rounded-2xl text-left transition-all duration-300 border cursor-pointer ${activeId === study.id
                                     ? "bg-white shadow-[0_8px_30px_rgba(35,106,124,0.15)] border-[#236a7c]/20 scale-[1.02]"
                                     : "bg-white/40 hover:bg-white/60 border-transparent hover:border-[#236a7c]/10"
@@ -143,12 +167,14 @@ const UseCases: React.FC = () => {
                         <button onClick={handlePrev} className="md:hidden absolute left-0 top-1/2 -translate-y-1/2 z-30 p-2 text-[#236a7c]/50 hover:text-[#236a7c] -ml-4"><FaChevronLeft size={24} /></button>
                         <button onClick={handleNext} className="md:hidden absolute right-0 top-1/2 -translate-y-1/2 z-30 p-2 text-[#236a7c]/50 hover:text-[#236a7c] -mr-4"><FaChevronRight size={24} /></button>
 
-                        <AnimatePresence mode="wait">
+                        <AnimatePresence mode="wait" custom={direction} initial={false}>
                             <motion.div
                                 key={activeCase.id}
-                                initial={{ opacity: 0, x: 20 }}
-                                animate={{ opacity: 1, x: 0 }}
-                                exit={{ opacity: 0, x: -20 }}
+                                custom={direction}
+                                variants={slideVariants}
+                                initial="enter"
+                                animate="center"
+                                exit="exit"
                                 transition={{ duration: 0.4, ease: "easeOut" }}
                                 drag="x"
                                 dragConstraints={{ left: 0, right: 0 }}
