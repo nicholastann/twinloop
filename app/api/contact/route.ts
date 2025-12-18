@@ -59,7 +59,7 @@ export async function POST(request: Request) {
 
         const mailOptions = {
             from: process.env.SMTP_FROM || process.env.SMTP_USER || '"Twinloop Contact" <noreply@twinloop.com>',
-            to: "ndtann@proton.me",
+            to: "nick@pyxis.ai",
             subject: `New Twinloop Contact: ${name}`,
             text: `You have a new contact request from the Twinloop website.\n\nName: ${name}\nEmail: ${email}\nMessage: ${optionalMessage || 'N/A'}\n\nThis contact has also been saved to your local database.`,
             html: `
