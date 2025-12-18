@@ -36,13 +36,14 @@ const Navbar: React.FC = () => {
       </ul>
 
       {/* Mobile Menu Button */}
-      <motion.button
+      <motion.a
+        href="#contact"
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         className="md:hidden px-4 py-2 rounded-lg bg-gradient-to-r from-[#236a7c] to-[#1e5b6d] text-white font-bold shadow-md"
       >
-        Menu
-      </motion.button>
+        Book Demo
+      </motion.a>
 
     </motion.nav>
   );

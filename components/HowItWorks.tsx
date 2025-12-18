@@ -10,8 +10,8 @@ const HowItWorks: React.FC = () => {
       {/* Section Header */}
       <div className="text-center mb-8">
         <ScrollFadeUp yOffset={20} duration={0.8} delay={0.1}>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-[#0f172a] tracking-tight leading-tight max-w-5xl mx-auto">
-            At the intersection of AI interviews and digital personas, <span className="text-[#236a7c]"> Twinloop lets you test every brand decision in minutes</span>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-[#0f172a] tracking-tight leading-tight mb-4">
+            Rapid Feedback Loop Using <span className="text-[#236a7c]">Customer Digital Twins</span>
           </h2>
         </ScrollFadeUp>
       </div>

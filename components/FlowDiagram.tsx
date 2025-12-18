@@ -68,13 +68,13 @@ const HowItWorksDisplay: React.FC = () => {
     setActiveStep((prev) => (prev - 1 + steps.length) % steps.length);
   };
 
-  // Auto-advance timer
+  // Auto-advance timer - resets on manual interaction
   useEffect(() => {
     const timer = setInterval(() => {
       handleNext();
     }, 10000); // 10 seconds
     return () => clearInterval(timer);
-  }, []);
+  }, [activeStep]);
 
   return (
     <section className="container mx-auto px-6 lg:px-8 relative">
@@ -89,7 +89,7 @@ const HowItWorksDisplay: React.FC = () => {
                 setDirection(index > activeStep ? 1 : -1);
                 setActiveStep(index);
               }}
-              className={`relative px-10 py-6 rounded-full text-base font-bold uppercase tracking-widest transition-all duration-500 overflow-hidden group mb-1 cursor-pointer ${activeStep === index
+              className={`relative px-10 py-6 rounded-full text-sm font-bold uppercase tracking-widest transition-all duration-500 overflow-hidden group mb-1 cursor-pointer ${activeStep === index
                 ? "text-white shadow-[0_10px_30px_rgba(35,106,124,0.3)] scale-105"
                 : "bg-white/50 text-[#334155] border border-white/60 hover:bg-white hover:scale-105"
                 }`}
@@ -138,15 +138,15 @@ const HowItWorksDisplay: React.FC = () => {
                   className="cursor-grab active:cursor-grabbing"
                 >
                   <div className="flex flex-col md:flex-row items-center md:items-center gap-4 md:gap-6 mb-4 md:mb-8 group-hover:scale-[1.02] transition-transform duration-500 justify-center lg:justify-start">
-                    <div className={`inline-flex items-center justify-center w-16 h-16 md:w-20 md:h-20 rounded-2xl md:rounded-3xl bg-gradient-to-br ${steps[activeStep].theme} text-white text-2xl md:text-3xl shadow-xl md:shadow-2xl shrink-0`}>
+                    <div className={`inline-flex items-center justify-center w-16 h-16 md:w-16 md:h-16 rounded-2xl md:rounded-3xl bg-gradient-to-br ${steps[activeStep].theme} text-white text-2xl md:text-2xl shadow-xl md:shadow-2xl shrink-0`}>
                       {steps[activeStep].icon}
                     </div>
-                    <h3 className="text-2xl md:text-5xl lg:text-6xl font-black text-[#0f172a] tracking-tight leading-tight text-center md:text-left">
+                    <h3 className="text-2xl md:text-3xl lg:text-4xl font-black text-[#0f172a] tracking-tight leading-tight text-center md:text-left">
                       <span className="md:hidden">{activeStep + 1}. </span>
                       {steps[activeStep].title}
                     </h3>
                   </div>
-                  <p className="text-xl md:text-3xl text-[#334155] leading-relaxed font-medium max-w-2xl text-center lg:text-left mx-auto lg:mx-0">
+                  <p className="text-lg md:text-xl text-[#334155] leading-relaxed font-medium max-w-2xl text-center lg:text-left mx-auto lg:mx-0">
                     {steps[activeStep].description}
                   </p>
                 </motion.div>
@@ -154,36 +154,34 @@ const HowItWorksDisplay: React.FC = () => {
             </div>
 
             {/* Image / Graphic Display */}
-            <div className="relative order-2 lg:order-2 h-[350px] md:h-[450px] lg:h-[550px]">
+            <div className="relative order-2 lg:order-2 w-full aspect-[4/3] md:aspect-[16/10] lg:aspect-[1/1]">
               {/* Background Glow */}
               <div className="absolute inset-0 bg-gradient-to-tr from-[#236a7c]/20 to-[#b8dce7]/30 blur-3xl rounded-full scale-110 pointer-events-none animate-pulse" />
 
-              <div className="relative w-full h-full bg-white/40 backdrop-blur-xl rounded-[3rem] border border-white/60 shadow-[0_30px_60px_rgba(0,0,0,0.05)] overflow-hidden p-8 group">
-                <div className="absolute inset-8 rounded-[2.5rem] overflow-hidden bg-[#f8fafc]">
-                  <AnimatePresence mode="wait" custom={direction} initial={false}>
-                    <motion.img
-                      key={activeStep}
-                      custom={direction}
-                      variants={slideVariants}
-                      src={steps[activeStep].image}
-                      alt={steps[activeStep].title}
-                      initial="enter"
-                      animate="center"
-                      exit="exit"
-                      transition={{ duration: 0.6 }}
-                      drag="x"
-                      dragConstraints={{ left: 0, right: 0 }}
-                      dragElastic={0.2}
-                      onDragEnd={(e, { offset }) => {
-                        if (offset.x < -50) handleNext();
-                        else if (offset.x > 50) handlePrev();
-                      }}
-                      className="w-full h-full object-contain p-8 cursor-grab active:cursor-grabbing"
-                    />
-                  </AnimatePresence>
-                </div>
+              <div className="relative w-full h-full bg-white/40 backdrop-blur-xl rounded-[2rem] border border-white/60 shadow-[0_30px_60px_rgba(0,0,0,0.05)] overflow-hidden group">
+                <AnimatePresence mode="wait" custom={direction} initial={false}>
+                  <motion.img
+                    key={activeStep}
+                    custom={direction}
+                    variants={slideVariants}
+                    src={steps[activeStep].image}
+                    alt={steps[activeStep].title}
+                    initial="enter"
+                    animate="center"
+                    exit="exit"
+                    transition={{ duration: 0.6 }}
+                    drag="x"
+                    dragConstraints={{ left: 0, right: 0 }}
+                    dragElastic={0.2}
+                    onDragEnd={(e, { offset }) => {
+                      if (offset.x < -50) handleNext();
+                      else if (offset.x > 50) handlePrev();
+                    }}
+                    className="w-full h-full object-contain cursor-grab active:cursor-grabbing"
+                  />
+                </AnimatePresence>
                 {/* Glass Reflection */}
-                <div className="absolute inset-0 bg-gradient-to-br from-white/40 to-transparent pointer-events-none rounded-[3rem]" />
+                <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent pointer-events-none rounded-[2rem]" />
               </div>
             </div>
 

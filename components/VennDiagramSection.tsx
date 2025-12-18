@@ -107,7 +107,7 @@ const USE_CASES = [
     },
     {
         id: 5,
-        title: "Packaging & PDP",
+        title: "Packaging",
         icon: <FaBoxOpen />,
         decisions: [
             "Benefit hierarchy",
@@ -363,7 +363,7 @@ const VennDiagramSection: React.FC = () => {
                                     {/* Circle 1 (Top) */}
                                     <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[340px] h-[340px] rounded-full border-4 border-[#333333] bg-white/95 shadow-lg flex flex-col items-center justify-start pt-16 z-0">
                                         <div className="flex flex-col gap-2 items-center w-full px-12">
-                                            {activeCase.decisions.slice(0, 3).map((d, i) => (
+                                            {activeCase.decisions.slice(0, activeCase.id === 4 ? 2 : 3).map((d, i) => (
                                                 <div key={i} className="bg-white border border-gray-200 shadow-sm rounded-lg px-3 py-2 text-xs font-bold text-[#334155] w-full text-center leading-tight">
                                                     {d}
                                                 </div>

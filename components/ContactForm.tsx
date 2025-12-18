@@ -21,11 +21,39 @@ const ContactForm: React.FC = () => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        console.log("Form submitted:", formData);
-        setSubmitted(true);
-        // Reset after a delay or keep as is
+
+        try {
+            const response = await fetch('/api/contact', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    name: formData.name,
+                    email: formData.email,
+                    optionalMessage: formData.message
+                }),
+            });
+
+            if (response.ok) {
+                setSubmitted(true);
+                setFormData({
+                    name: "",
+                    email: "",
+                    title: "",
+                    annualSpend: "",
+                    message: "",
+                });
+            } else {
+                console.error("Form submission failed");
+                alert("Something went wrong. Please try again.");
+            }
+        } catch (error) {
+            console.error("Error submitting form:", error);
+            alert("Something went wrong. Please try again.");
+        }
     };
 
     return (

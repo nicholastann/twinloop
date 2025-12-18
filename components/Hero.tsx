@@ -122,7 +122,7 @@ const Hero: React.FC = () => {
       }, 300); // Speed per card
       return () => clearInterval(interval);
     }
-  }, [step, articles.length]);
+  }, [step, articles.length, pileIndex]);
 
   // Sync Pile Index to Visible Articles
   useEffect(() => {
@@ -241,10 +241,10 @@ const Hero: React.FC = () => {
       <div className="w-full max-w-[99%] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-y-0 lg:gap-0 items-center h-full">
 
         {/* Left Column: Text & CTA */}
-        <div className="flex flex-col h-auto lg:h-full justify-between z-20 relative px-4 md:px-0 pb-0 md:pb-8">
+        <div className="flex flex-col h-auto lg:h-full z-20 relative px-4 md:px-0 pb-0 md:pb-8 justify-center">
 
           {/* Top Content (Headline + CTA) */}
-          <div className="flex flex-col justify-center flex-grow space-y-8">
+          <div className="flex flex-col justify-center space-y-8">
             {/* Main Headline */}
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
@@ -258,7 +258,7 @@ const Hero: React.FC = () => {
                 <motion.span initial={{ opacity: 0, height: 0 }}
                   animate={{ opacity: 1, height: "auto" }}
                   transition={{ duration: 0.5 }}
-                  className="block text-[#236a7c] text-4xl md:text-6xl lg:text-7xl xl:text-8xl whitespace-nowrap"
+                  className="block text-[#236a7c] text-3xl md:text-6xl lg:text-7xl xl:text-8xl whitespace-nowrap"
                 >
                   Derisk It In Minutes.
                 </motion.span>
@@ -266,7 +266,7 @@ const Hero: React.FC = () => {
             </motion.h1>
 
             {/* Subtitle & CTA Wrapper */}
-            <div className="flex flex-col gap-2 md:gap-10 w-full">
+            <div className="flex flex-col gap-2 md:gap-6 w-full mt-4 lg:mt-12">
               <div className="h-16 md:h-20 relative flex items-start">
                 {step >= 3 && (
                   <motion.p
@@ -300,7 +300,7 @@ const Hero: React.FC = () => {
 
           {/* Trusted By Section (Desktop: Bottom of Left Col) */}
           <div
-            className="hidden lg:block pt-4 border-t border-border w-full max-w-xl transition-opacity duration-1000 mb-4"
+            className="hidden lg:block pt-4 border-t border-border w-full max-w-xl transition-opacity duration-1000 mt-8 mb-4"
             style={{ opacity: step >= 3 ? 1 : 0 }}
           >
             <p className="text-[#334155]/80 text-xs font-bold uppercase tracking-widest mb-4">

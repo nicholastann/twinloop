@@ -25,9 +25,9 @@ const Home: React.FC = () => {
       <div className="relative z-10">
         <Hero />
         <ProblemSection />
+        <HowItWorks />
         <UseCases />
         <VennDiagramSection />
-        <HowItWorks />
       </div>
 
       <WhyTwinloop />

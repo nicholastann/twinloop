@@ -106,17 +106,13 @@ const UseCases: React.FC = () => {
                 <div className="text-center mb-10">
                     <ScrollFadeUp yOffset={20} duration={0.8} delay={0.1}>
                         <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-[#0f172a] tracking-tight leading-tight mb-4">
-                            Rapid Feedback Loop Using <span className="text-[#236a7c]">Customer Digital Twins</span>
+                            From Insights to <span className="text-[#236a7c]">Impact</span>
                         </h2>
-                        <p className="text-xl text-[#334155] max-w-4xl mx-auto whitespace-normal md:whitespace-nowrap font-medium">
-                            From entertainment to wellness, see how diverse organizations use Twinloop to turn complexity into clarity.
-                        </p>
                     </ScrollFadeUp>
                 </div>
 
                 <div className="flex flex-col lg:grid lg:grid-cols-12 gap-8 lg:gap-10 max-w-7xl mx-auto">
 
-                    {/* Menu / Selector Column */}
                     {/* Menu / Selector Column */}
                     <div className="hidden lg:flex lg:col-span-4 flex-col gap-6">
                         {caseStudies.map((study, index) => (
@@ -202,10 +198,7 @@ const UseCases: React.FC = () => {
                                                 />
                                             </div>
                                             <div>
-                                                <h3 className="text-2xl md:text-5xl font-black text-[#0f172a] leading-none mb-1 md:mb-2">
-                                                    {activeCase.company}
-                                                </h3>
-                                                <p className="text-base md:text-xl text-[#334155] font-bold leading-none mt-1">
+                                                <p className="text-xl md:text-3xl text-[#0f172a] font-black leading-none mt-1">
                                                     {activeCase.title}
                                                 </p>
                                             </div>
