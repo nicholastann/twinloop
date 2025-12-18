@@ -361,26 +361,28 @@ const VennDiagramSection: React.FC = () => {
                                     </div>
 
                                     {/* Intersection Card */}
-                                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 w-[220px] pointer-events-none text-center">
-                                        <div className="bg-white p-3 rounded-xl border border-[#236a7c]/20 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.2)]">
-                                            <div className="flex justify-center mb-1.5">
-                                                <span className="bg-[#236a7c] text-white px-1.5 py-0.5 rounded-full text-[8px] font-black uppercase tracking-widest">Result</span>
+                                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 w-[280px] pointer-events-none text-center">
+                                        <div className="bg-white p-4 rounded-xl border border-[#236a7c]/20 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.2)]">
+                                            <div className="flex justify-center mb-2">
+                                                <span className="bg-[#236a7c] text-white px-2 py-0.5 rounded-full text-[9px] font-black uppercase tracking-widest">Result</span>
                                             </div>
 
-                                            <div className="border-b border-gray-100 pb-1.5 mb-1.5">
-                                                <p className="text-xl font-black text-[#164656] leading-none mb-0.5">
+                                            <div className="border-b border-gray-100 pb-2 mb-2">
+                                                <p className="text-2xl font-black text-[#164656] leading-none mb-0.5">
                                                     {activeCase.simulation[0].split(":")[1]?.split(",")[0] || activeCase.simulation[0]}
                                                 </p>
-                                                <p className="text-[8px] font-bold text-[#64748b] uppercase">Simulation Score</p>
                                             </div>
 
-                                            <div className="flex gap-1.5 items-start text-left mb-1.5">
-                                                <p className="text-[9px] text-[#334155] leading-tight line-clamp-2">{activeCase.simulation[1]}</p>
-                                            </div>
+                                            <div className="grid grid-cols-2 gap-3 text-left">
+                                                <div className="flex flex-col">
+                                                    <p className="text-[9px] font-black text-[#64748b] uppercase mb-1">Problem</p>
+                                                    <p className="text-[10px] text-[#334155] leading-tight">{activeCase.simulation[1]}</p>
+                                                </div>
 
-                                            <div className="bg-[#f0f9ff] p-1.5 rounded-lg flex gap-1.5 items-start text-left border border-[#236a7c]/20">
-                                                <p className="text-[8px] font-black text-[#236a7c] uppercase leading-none mb-0.5">Fix</p>
-                                                <p className="text-[9px] font-bold text-[#164656] leading-tight line-clamp-2">{activeCase.simulation[3].replace("Fix:", "").trim()}</p>
+                                                <div className="flex flex-col bg-[#f0f9ff] p-2 rounded-lg border border-[#236a7c]/20">
+                                                    <p className="text-[9px] font-black text-[#236a7c] uppercase mb-1">Fix</p>
+                                                    <p className="text-[10px] font-bold text-[#164656] leading-tight">{activeCase.simulation[3].replace("Fix:", "").trim()}</p>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

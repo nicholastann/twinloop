@@ -3,14 +3,6 @@
 import React, { useState } from "react";
 import ScrollFadeUp from "./ui/ScrollFadeUp"
 
-const spendOptions = [
-    "$0 - $1M",
-    "$1M - $10M",
-    "$10M - $50M",
-    "$50M - $100M",
-    "$100M+",
-];
-
 const ContactForm: React.FC = () => {
     const [formData, setFormData] = useState({
         name: "",
