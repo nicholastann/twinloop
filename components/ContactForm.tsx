@@ -1,7 +1,9 @@
 "use client";
 
 import React, { useState } from "react";
-import ScrollFadeUp from "./ui/ScrollFadeUp"
+import ScrollFadeUp from "./ui/ScrollFadeUp";
+import { motion, AnimatePresence } from "framer-motion";
+import { FaCheckCircle } from "react-icons/fa";
 
 const ContactForm: React.FC = () => {
     const [formData, setFormData] = useState({
@@ -11,6 +13,7 @@ const ContactForm: React.FC = () => {
         annualSpend: "",
         message: "",
     });
+    const [submitted, setSubmitted] = useState(false);
 
     const handleChange = (
         e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -21,8 +24,8 @@ const ContactForm: React.FC = () => {
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         console.log("Form submitted:", formData);
-        alert("Thank you! We'll reach out soon.");
-        setFormData({ name: "", email: "", title: "", annualSpend: "", message: "" });
+        setSubmitted(true);
+        // Reset after a delay or keep as is
     };
 
     return (
@@ -55,53 +58,91 @@ const ContactForm: React.FC = () => {
 
                         {/* Gradient border container */}
                         <div className="p-1 rounded-3xl bg-gradient-to-tr from-[#236a7c]/10 via-[#236a7c] to-[#236a7c]/10 shadow-lg shadow-[#236a7c]/20 w-full">
-                            <form
-                                onSubmit={handleSubmit}
-                                className="relative bg-white p-8 md:p-12 rounded-[22px] space-y-6 shadow-[inset_0_0_20px_rgba(0,0,0,0.02)]"
-                            >
-                                {/* Inputs Grid */}
-                                <div className="grid sm:grid-cols-2 gap-6">
-                                    <input
-                                        type="text"
-                                        name="name"
-                                        placeholder="Name"
-                                        required
-                                        value={formData.name}
-                                        onChange={handleChange}
-                                        className="w-full p-4 text-lg rounded-xl border border-gray-200 bg-[#f8fafc] text-[#0f172a] placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#236a7c] focus:border-transparent transition-all shadow-sm"
-                                    />
-                                    <input
-                                        type="email"
-                                        name="email"
-                                        placeholder="Company Email"
-                                        required
-                                        value={formData.email}
-                                        onChange={handleChange}
-                                        className="w-full p-4 text-lg rounded-xl border border-gray-200 bg-[#f8fafc] text-[#0f172a] placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#236a7c] focus:border-transparent transition-all shadow-sm"
-                                    />
-                                </div>
+                            <AnimatePresence mode="wait">
+                                {submitted ? (
+                                    <motion.div
+                                        key="success"
+                                        initial={{ opacity: 0, scale: 0.9 }}
+                                        animate={{ opacity: 1, scale: 1 }}
+                                        exit={{ opacity: 0, scale: 0.9 }}
+                                        className="bg-white p-12 rounded-[22px] shadow-sm flex flex-col items-center justify-center text-center min-h-[400px]"
+                                    >
+                                        <motion.div
+                                            initial={{ scale: 0 }}
+                                            animate={{ scale: 1 }}
+                                            transition={{ type: "spring", stiffness: 200, damping: 10 }}
+                                            className="w-20 h-20 bg-[#f0f9ff] rounded-full flex items-center justify-center text-[#236a7c] mb-6"
+                                        >
+                                            <FaCheckCircle size={40} />
+                                        </motion.div>
+                                        <h3 className="text-3xl font-black text-[#0f172a] mb-2">Message Sent!</h3>
+                                        <p className="text-[#334155] text-lg">We'll be in touch shortly.</p>
+                                        <button
+                                            onClick={() => setSubmitted(false)} // Optional: allow reset
+                                            className="mt-8 text-[#236a7c] font-bold hover:underline"
+                                        >
+                                            Send another message
+                                        </button>
+                                    </motion.div>
+                                ) : (
+                                    <motion.form
+                                        key="form"
+                                        initial={{ opacity: 0 }}
+                                        animate={{ opacity: 1 }}
+                                        exit={{ opacity: 0 }}
+                                        onSubmit={handleSubmit}
+                                        className="relative bg-white p-8 md:p-12 rounded-[22px] space-y-6 shadow-[inset_0_0_20px_rgba(0,0,0,0.02)]"
+                                    >
+                                        {/* Inputs Grid */}
+                                        <div className="grid sm:grid-cols-2 gap-6">
+                                            <motion.input
+                                                whileFocus={{ scale: 1.02, backgroundColor: "#fff" }}
+                                                type="text"
+                                                name="name"
+                                                placeholder="Name"
+                                                required
+                                                value={formData.name}
+                                                onChange={handleChange}
+                                                className="w-full p-4 text-lg rounded-xl border border-gray-200 bg-[#f8fafc] text-[#0f172a] placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#236a7c] focus:border-transparent transition-all shadow-sm"
+                                            />
+                                            <motion.input
+                                                whileFocus={{ scale: 1.02, backgroundColor: "#fff" }}
+                                                type="email"
+                                                name="email"
+                                                placeholder="Company Email"
+                                                required
+                                                value={formData.email}
+                                                onChange={handleChange}
+                                                className="w-full p-4 text-lg rounded-xl border border-gray-200 bg-[#f8fafc] text-[#0f172a] placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#236a7c] focus:border-transparent transition-all shadow-sm"
+                                            />
+                                        </div>
 
 
-                                <textarea
-                                    name="message"
-                                    placeholder="Optional message"
-                                    value={formData.message}
-                                    onChange={handleChange}
-                                    className="w-full p-4 text-lg rounded-xl border border-gray-200 bg-[#f8fafc] text-[#0f172a] placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#236a7c] focus:border-transparent transition-all h-40 resize-none shadow-sm"
-                                ></textarea>
+                                        <motion.textarea
+                                            whileFocus={{ scale: 1.02, backgroundColor: "#fff" }}
+                                            name="message"
+                                            placeholder="Optional message"
+                                            value={formData.message}
+                                            onChange={handleChange}
+                                            className="w-full p-4 text-lg rounded-xl border border-gray-200 bg-[#f8fafc] text-[#0f172a] placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#236a7c] focus:border-transparent transition-all h-40 resize-none shadow-sm"
+                                        ></motion.textarea>
 
 
-                                <button
-                                    type="submit"
-                                    className="cursor-pointer w-full bg-gradient-to-r from-[#236a7c] to-[#1e5b6d] hover:from-[#1e5b6d] hover:to-[#164656] text-white text-xl font-bold rounded-xl py-4 shadow-lg transform transition-all duration-300 active:scale-[0.97]"
-                                >
-                                    Book Demo
-                                </button>
+                                        <motion.button
+                                            whileHover={{ scale: 1.02 }}
+                                            whileTap={{ scale: 0.98 }}
+                                            type="submit"
+                                            className="cursor-pointer w-full bg-gradient-to-r from-[#236a7c] to-[#1e5b6d] hover:from-[#1e5b6d] hover:to-[#164656] text-white text-xl font-bold rounded-xl py-4 shadow-lg active:scale-[0.97]"
+                                        >
+                                            Book Demo
+                                        </motion.button>
 
-                                <p className="text-muted-foreground text-sm mt-6 text-center font-medium opacity-80">
-                                    We respect your privacy. Your information will never be shared.
-                                </p>
-                            </form>
+                                        <p className="text-muted-foreground text-sm mt-6 text-center font-medium opacity-80">
+                                            We respect your privacy. Your information will never be shared.
+                                        </p>
+                                    </motion.form>
+                                )}
+                            </AnimatePresence>
                         </div>
                     </div>
 

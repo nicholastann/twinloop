@@ -102,7 +102,7 @@ const UseCases: React.FC = () => {
                             <button
                                 key={study.id}
                                 onClick={() => setActiveId(study.id)}
-                                className={`group relative p-6 rounded-2xl text-left transition-all duration-300 border ${activeId === study.id
+                                className={`group relative p-6 rounded-2xl text-left transition-all duration-300 border cursor-pointer ${activeId === study.id
                                     ? "bg-white shadow-[0_8px_30px_rgba(35,106,124,0.15)] border-[#236a7c]/20 scale-[1.02]"
                                     : "bg-white/40 hover:bg-white/60 border-transparent hover:border-[#236a7c]/10"
                                     }`}
@@ -160,36 +160,38 @@ const UseCases: React.FC = () => {
                                 }}
                                 className="h-full cursor-grab active:cursor-grabbing"
                             >
-                                <div className="h-full bg-white/70 backdrop-blur-xl rounded-[3rem] border border-white/60 p-10 md:p-12 shadow-[0_20px_60px_rgba(35,106,124,0.08)] relative overflow-hidden flex flex-col justify-between">
+                                <div className="h-full bg-white/70 backdrop-blur-xl rounded-[2rem] md:rounded-[3rem] border border-white/60 p-6 md:p-12 shadow-[0_20px_60px_rgba(35,106,124,0.08)] relative overflow-hidden flex flex-col justify-between">
 
                                     {/* Decorative Gradient Blob */}
-                                    <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-[#236a7c]/5 to-[#b8dce7]/10 rounded-full blur-3xl -mr-20 -mt-20 pointer-events-none" />
+                                    <div className="absolute top-0 right-0 w-64 h-64 md:w-96 md:h-96 bg-gradient-to-br from-[#236a7c]/5 to-[#b8dce7]/10 rounded-full blur-3xl -mr-20 -mt-20 pointer-events-none" />
 
                                     {/* Top Row: company + Stats */}
-                                    <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 md:gap-8 mb-10 relative z-10 border-b border-gray-100/50 pb-8">
-                                        <div className="flex items-center gap-6">
-                                            <img
-                                                src={activeCase.logo}
-                                                alt={`${activeCase.company} logo`}
-                                                className="w-16 h-16 object-contain"
-                                            />
+                                    <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 md:gap-8 mb-6 md:mb-10 relative z-10 border-b border-gray-100/50 pb-6 md:pb-8">
+                                        <div className="flex items-center gap-4 md:gap-6">
+                                            <div className="w-12 h-12 md:w-16 md:h-16 flex-shrink-0 bg-white/50 rounded-xl p-2 md:p-0 flex items-center justify-center border border-white/60">
+                                                <img
+                                                    src={activeCase.logo}
+                                                    alt={`${activeCase.company} logo`}
+                                                    className="w-full h-full object-contain"
+                                                />
+                                            </div>
                                             <div>
-                                                <h3 className="text-3xl md:text-5xl font-black text-[#0f172a] leading-none mb-2">
+                                                <h3 className="text-2xl md:text-5xl font-black text-[#0f172a] leading-none mb-1 md:mb-2">
                                                     {activeCase.company}
                                                 </h3>
-                                                <p className="text-xl text-[#334155] font-bold leading-none mt-1">
+                                                <p className="text-base md:text-xl text-[#334155] font-bold leading-none mt-1">
                                                     {activeCase.title}
                                                 </p>
                                             </div>
                                         </div>
 
-                                        <div className="flex gap-10">
+                                        <div className="flex w-full md:w-auto gap-8 md:gap-10 justify-start md:justify-end pl-2 md:pl-0">
                                             {activeCase.stats.map((stat, i) => (
-                                                <div key={i} className="text-right">
+                                                <div key={i} className="text-left md:text-right">
                                                     <div className="text-2xl md:text-4xl font-black text-[#236a7c] tracking-tight leading-none mb-1">
                                                         {stat.value}
                                                     </div>
-                                                    <div className="text-xs md:text-sm font-black text-[#334155]/60 uppercase tracking-widest">
+                                                    <div className="text-[10px] md:text-xs md:text-sm font-black text-[#334155]/60 uppercase tracking-widest">
                                                         {stat.label}
                                                     </div>
                                                 </div>
@@ -198,45 +200,45 @@ const UseCases: React.FC = () => {
                                     </div>
 
                                     {/* Content Grid */}
-                                    <div className="grid md:grid-cols-2 gap-10 relative z-10 flex-grow">
-                                        <div className="space-y-8 flex flex-col justify-center">
-                                            <div className="bg-white/50 p-6 rounded-3xl border border-white/60">
-                                                <h4 className="flex items-center gap-3 text-sm font-black text-[#0f172a] uppercase tracking-widest mb-3">
+                                    <div className="grid md:grid-cols-2 gap-6 md:gap-10 relative z-10 flex-grow">
+                                        <div className="space-y-4 md:space-y-8 flex flex-col justify-center">
+                                            <div className="bg-white/50 p-5 md:p-6 rounded-2xl md:rounded-3xl border border-white/60">
+                                                <h4 className="flex items-center gap-2 md:gap-3 text-xs md:text-sm font-black text-[#0f172a] uppercase tracking-widest mb-2 md:mb-3">
                                                     <FaLayerGroup className="text-[#236a7c]" size={14} /> Context
                                                 </h4>
-                                                <p className="text-base text-[#334155] leading-relaxed font-medium">
+                                                <p className="text-sm md:text-base text-[#334155] leading-relaxed font-medium">
                                                     {activeCase.context}
                                                 </p>
                                             </div>
 
-                                            <div className="bg-white/50 p-6 rounded-3xl border border-white/60">
-                                                <h4 className="flex items-center gap-3 text-sm font-black text-[#0f172a] uppercase tracking-widest mb-3">
+                                            <div className="bg-white/50 p-5 md:p-6 rounded-2xl md:rounded-3xl border border-white/60">
+                                                <h4 className="flex items-center gap-2 md:gap-3 text-xs md:text-sm font-black text-[#0f172a] uppercase tracking-widest mb-2 md:mb-3">
                                                     <FaChartLine className="text-[#236a7c]" size={14} /> Findings
                                                 </h4>
-                                                <p className="text-base text-[#334155] leading-relaxed font-medium">
+                                                <p className="text-sm md:text-base text-[#334155] leading-relaxed font-medium">
                                                     {activeCase.findings}
                                                 </p>
                                             </div>
                                         </div>
 
-                                        <div className="bg-[#f8fafc] rounded-3xl p-8 border border-[#e2e8f0] flex flex-col justify-center">
-                                            <div className="flex items-center gap-5 mb-6">
+                                        <div className="bg-[#f8fafc] rounded-2xl md:rounded-3xl p-6 md:p-8 border border-[#e2e8f0] flex flex-col justify-center mt-2 md:mt-0">
+                                            <div className="flex items-center gap-4 md:gap-5 mb-4 md:mb-6">
                                                 <img
                                                     src={activeCase.person.avatar}
                                                     alt={activeCase.person.name}
-                                                    className="w-14 h-14 rounded-full object-cover border-2 border-white shadow-md"
+                                                    className="w-12 h-12 md:w-14 md:h-14 rounded-full object-cover border-2 border-white shadow-md"
                                                 />
                                                 <div>
-                                                    <h4 className="text-[#0f172a] font-black text-lg leading-tight">
+                                                    <h4 className="text-[#0f172a] font-black text-base md:text-lg leading-tight">
                                                         {activeCase.person.name}
                                                     </h4>
-                                                    <p className="text-[#334155]/70 text-sm font-bold">
+                                                    <p className="text-[#334155]/70 text-xs md:text-sm font-bold">
                                                         {activeCase.person.title}
                                                     </p>
                                                 </div>
                                             </div>
 
-                                            <p className="text-xl font-medium text-[#236a7c] italic leading-relaxed">
+                                            <p className="text-lg md:text-xl font-medium text-[#236a7c] italic leading-relaxed">
                                                 "{activeCase.testimonial}"
                                             </p>
                                         </div>

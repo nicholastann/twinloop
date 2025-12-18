@@ -314,7 +314,7 @@ const VennDiagramSection: React.FC = () => {
                 <div className="relative w-full max-w-[1200px] mx-auto min-h-[650px] flex justify-center items-center font-sans transform scale-[0.85] lg:scale-[1] origin-top">
 
                     {/* Mobile Layout (Vertical Stack) */}
-                    <div className="md:hidden w-full flex flex-col items-center gap-6 py-8">
+                    <div className="md:hidden w-full flex flex-col items-center gap-6 py-2">
                         <h4 className="text-base font-black text-[#64748b] uppercase tracking-wider">Decisions you’re making</h4>
 
                         <div className="relative w-full h-[550px]">
@@ -354,7 +354,7 @@ const VennDiagramSection: React.FC = () => {
                                         <div className="flex flex-col gap-2 items-center w-full px-10">
                                             {activeCase.customer.slice(2, 4).map((c, i) => (
                                                 <div key={i} className="bg-[#f0f9ff] border border-[#236a7c]/10 shadow-sm rounded-lg px-3 py-2 text-[10px] font-medium italic text-[#0f172a] w-full text-center leading-tight">
-                                                    "{c}"
+                                                    {c}
                                                 </div>
                                             ))}
                                         </div>
@@ -493,7 +493,7 @@ const VennDiagramSection: React.FC = () => {
                                                 className="absolute px-5 py-3 bg-[#f0f9ff]/90 backdrop-blur-sm border border-[#236a7c]/10 shadow-sm rounded-xl text-[#0f172a] font-medium text-sm italic max-w-[180px] leading-snug"
                                                 style={{ top: pos.top, right: pos.right }}
                                             >
-                                                "{item}"
+                                                {item}
                                             </div>
                                         );
                                     })}

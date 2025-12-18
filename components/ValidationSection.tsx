@@ -2,6 +2,7 @@
 
 import React from "react";
 import ScrollFadeUp from "./ui/ScrollFadeUp";
+import { motion } from "framer-motion";
 
 const validations = [
     {
@@ -34,11 +35,14 @@ const ValidationSection: React.FC = () => {
                 <div className="grid md:grid-cols-2 gap-8 lg:gap-16 max-w-5xl mx-auto">
                     {validations.map((v, index) => (
                         <ScrollFadeUp key={index} yOffset={20} duration={0.8} delay={0.2 + index * 0.1} className="h-full">
-                            <a
+                            <motion.a
                                 href={v.href || "#"}
                                 target={v.href ? "_blank" : "_self"}
                                 rel="noopener noreferrer"
-                                className="group relative flex flex-col h-full min-h-[350px] bg-white/50 backdrop-blur-sm border border-white/60 p-10 rounded-3xl shadow-[0_10px_40px_rgba(0,0,0,0.02)] hover:shadow-[0_20px_40px_rgba(35,106,124,0.12)] hover:-translate-y-1 transition-all duration-300 text-center items-center hover:bg-white"
+                                whileHover={{ y: -5, boxShadow: "0 20px 40px rgba(35,106,124,0.12)" }}
+                                whileTap={{ scale: 0.98 }}
+                                transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                                className="group relative flex flex-col h-full min-h-[350px] bg-white/50 backdrop-blur-sm border border-white/60 p-10 rounded-3xl shadow-[0_10px_40px_rgba(0,0,0,0.02)] text-center items-center hover:bg-white transition-colors duration-300"
                             >
                                 <div className="h-24 flex items-center justify-center gap-4 mb-6 w-full">
                                     <img
@@ -65,7 +69,7 @@ const ValidationSection: React.FC = () => {
                                         Read Study <span className="ml-2">→</span>
                                     </div>
                                 )}
-                            </a>
+                            </motion.a>
                         </ScrollFadeUp>
                     ))}
                 </div>
