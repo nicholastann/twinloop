@@ -1,9 +1,8 @@
 import { NextResponse } from 'next/server';
-import fs from 'fs/promises';
-import path from 'path';
+
 import nodemailer from 'nodemailer';
 
-const CONTACTS_FILE = path.join(process.cwd(), 'data', 'contacts.json');
+
 
 export async function POST(request: Request) {
     try {
@@ -17,32 +16,7 @@ export async function POST(request: Request) {
             );
         }
 
-        // 1. File Storage Logic
-        let contacts = [];
-        try {
-            const data = await fs.readFile(CONTACTS_FILE, 'utf-8');
-            contacts = JSON.parse(data);
-        } catch (e) {
-            // File likely doesn't exist or is empty, start fresh
-        }
-
-        const newContact = {
-            name,
-            email,
-            optionalMessage,
-            timestamp: new Date().toISOString()
-        };
-
-        contacts.push(newContact);
-
-        // Ensure the data directory exists before writing
-        try {
-            await fs.mkdir(path.dirname(CONTACTS_FILE), { recursive: true });
-        } catch (e) {
-            // Ignore if exists
-        }
-
-        await fs.writeFile(CONTACTS_FILE, JSON.stringify(contacts, null, 2));
+        // File storage logic removed (Email only service).
 
         // 2. Email Sending Logic
         // Using nodemailer to send email to the specified address
@@ -61,7 +35,7 @@ export async function POST(request: Request) {
             from: process.env.SMTP_FROM || process.env.SMTP_USER || '"Twinloop Contact" <noreply@twinloop.com>',
             to: "nick@pyxis.ai",
             subject: `New Twinloop Contact: ${name}`,
-            text: `You have a new contact request from the Twinloop website.\n\nName: ${name}\nEmail: ${email}\nMessage: ${optionalMessage || 'N/A'}\n\nThis contact has also been saved to your local database.`,
+            text: `You have a new contact request from the Twinloop website.\n\nName: ${name}\nEmail: ${email}\nMessage: ${optionalMessage || 'N/A'}`,
             html: `
         <div style="font-family: Arial, sans-serif; padding: 20px; color: #333;">
             <h2 style="color: #236a7c;">New Contact Request</h2>
@@ -69,7 +43,7 @@ export async function POST(request: Request) {
             <p><strong>Email:</strong> <a href="mailto:${email}">${email}</a></p>
             <p><strong>Message:</strong><br/>${optionalMessage || 'N/A'}</p>
             <hr style="border: 1px solid #eee; margin: 20px 0;" />
-            <p style="font-size: 12px; color: #888;">This contact has been saved to data/contacts.json</p>
+
         </div>
       `,
         };
