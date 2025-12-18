@@ -38,16 +38,16 @@ const ContactForm: React.FC = () => {
             id="contact"
             className="relative bg-transparent pb-16"
         >
-            <div className="container mx-auto px-6 lg:px-8 max-w-4xl">
-                <div className="text-center mb-12">
+            <div className="container mx-auto px-6 lg:px-8 max-w-3xl">
+                <div className="text-center mb-10">
                     <ScrollFadeUp yOffset={20} duration={0.8} delay={0.1}>
-                        <h2 className="text-4xl md:text-5xl font-black text-[#0f172a] tracking-tight leading-tight mb-6">
+                        <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-[#0f172a] tracking-tight leading-tight mb-4">
                             See Twinloop <span className="text-[#236a7c]">In Action</span>
                         </h2>
                     </ScrollFadeUp>
 
                     <ScrollFadeUp yOffset={20} duration={0.8} delay={0.2}>
-                        <p className="text-[#334155] text-xl md:text-2xl font-medium leading-relaxed max-w-2xl mx-auto">
+                        <p className="text-[#334155] text-xl font-medium leading-relaxed max-w-2xl mx-auto">
                             Book a personalized demo and discover how leading brands are making every marketing dollar count.
                         </p>
                     </ScrollFadeUp>
@@ -62,7 +62,7 @@ const ContactForm: React.FC = () => {
                         <div className="absolute -inset-6 rounded-3xl bg-gradient-to-tr from-[#236a7c]/20 via-[#236a7c]/30 to-[#b8dce7]/40 blur-3xl animate-pulse pointer-events-none"></div>
 
                         {/* Gradient border container */}
-                        <div className="p-1 rounded-3xl bg-gradient-to-tr from-[#236a7c]/10 via-[#236a7c] to-[#236a7c]/10 shadow-lg shadow-[#236a7c]/20">
+                        <div className="p-1 rounded-3xl bg-gradient-to-tr from-[#236a7c]/10 via-[#236a7c] to-[#236a7c]/10 shadow-lg shadow-[#236a7c]/20 w-full">
                             <form
                                 onSubmit={handleSubmit}
                                 className="relative bg-white p-8 md:p-12 rounded-[22px] space-y-6 shadow-[inset_0_0_20px_rgba(0,0,0,0.02)]"
@@ -101,7 +101,7 @@ const ContactForm: React.FC = () => {
 
                                 <button
                                     type="submit"
-                                    className="cursor-pointer w-full bg-gradient-to-r from-[#236a7c] to-[#1e5b6d] hover:from-[#1e5b6d] hover:to-[#164656] text-white text-xl font-bold rounded-xl py-5 shadow-lg transform transition-all duration-300 active:scale-[0.97]"
+                                    className="cursor-pointer w-full bg-gradient-to-r from-[#236a7c] to-[#1e5b6d] hover:from-[#1e5b6d] hover:to-[#164656] text-white text-xl font-bold rounded-xl py-4 shadow-lg transform transition-all duration-300 active:scale-[0.97]"
                                 >
                                     Book Demo
                                 </button>

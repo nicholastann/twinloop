@@ -6,11 +6,11 @@ import ScrollFadeUp from "./ui/ScrollFadeUp"
 
 const HowItWorks: React.FC = () => {
   return (
-    <section id="how-it-works" className="py-16 bg-transparent text-[#0f1a1f]">
+    <section id="how-it-works" className="py-10 bg-transparent text-[#0f1a1f]">
       {/* Section Header */}
-      <div className="text-center mb-12">
+      <div className="text-center mb-8">
         <ScrollFadeUp yOffset={20} duration={0.8} delay={0.1}>
-          <h2 className="text-4xl md:text-5xl font-black text-[#0f172a] tracking-tight leading-tight max-w-5xl mx-auto">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-[#0f172a] tracking-tight leading-tight max-w-5xl mx-auto">
             At the intersection of AI interviews and digital personas, <span className="text-[#236a7c]"> Twinloop lets you test every brand decision in minutes</span>
           </h2>
         </ScrollFadeUp>

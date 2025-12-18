@@ -21,47 +21,47 @@ const validations = [
 
 const ValidationSection: React.FC = () => {
     return (
-        <section id="validation" className="py-24 bg-transparent overflow-hidden">
-            <div className="container mx-auto px-6 lg:px-8 mb-24">
-                <div className="text-center mb-20">
+        <section id="validation" className="pt-12 pb-24 bg-transparent overflow-hidden">
+            <div className="container mx-auto px-6 lg:px-8 mb-8">
+                <div className="text-center mb-12">
                     <ScrollFadeUp yOffset={20} duration={0.8} delay={0.1}>
-                        <h2 className="text-5xl md:text-6xl font-black text-[#0f172a] tracking-tight leading-tighter mb-6">
+                        <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-[#0f172a] tracking-tight leading-tight mb-6">
                             Predictive Power.<br /><span className="text-[#236a7c]">Proven Performance.</span>
                         </h2>
                     </ScrollFadeUp>
                 </div>
 
-                <div className="grid md:grid-cols-2 gap-8 lg:gap-12 max-w-6xl mx-auto">
+                <div className="grid md:grid-cols-2 gap-8 lg:gap-16 max-w-5xl mx-auto">
                     {validations.map((v, index) => (
                         <ScrollFadeUp key={index} yOffset={20} duration={0.8} delay={0.2 + index * 0.1} className="h-full">
                             <a
                                 href={v.href || "#"}
                                 target={v.href ? "_blank" : "_self"}
                                 rel="noopener noreferrer"
-                                className="group relative flex flex-col h-full bg-white/50 backdrop-blur-sm border border-white/60 p-12 rounded-[3rem] shadow-[0_10px_40px_rgba(0,0,0,0.02)] hover:shadow-[0_30px_60px_rgba(35,106,124,0.12)] hover:-translate-y-2 transition-all duration-300 text-center items-center hover:bg-white"
+                                className="group relative flex flex-col h-full min-h-[350px] bg-white/50 backdrop-blur-sm border border-white/60 p-10 rounded-3xl shadow-[0_10px_40px_rgba(0,0,0,0.02)] hover:shadow-[0_20px_40px_rgba(35,106,124,0.12)] hover:-translate-y-1 transition-all duration-300 text-center items-center hover:bg-white"
                             >
-                                <div className="h-32 flex items-center justify-center gap-6 mb-8 w-full">
+                                <div className="h-24 flex items-center justify-center gap-4 mb-6 w-full">
                                     <img
                                         src={v.logo}
                                         alt={v.title}
-                                        className={`w-auto object-contain ${index === 1 ? 'h-32' : 'h-14'}`}
+                                        className={`w-auto object-contain ${index === 1 ? 'h-24' : 'h-10'}`}
                                     />
                                     {v.logo2 && (
                                         <>
-                                            <div className="h-8 w-px bg-gray-200" />
-                                            <img src={v.logo2} alt="Partner Logo" className="h-10 w-auto object-contain" />
+                                            <div className="h-6 w-px bg-gray-200" />
+                                            <img src={v.logo2} alt="Partner Logo" className="h-8 w-auto object-contain" />
                                         </>
                                     )}
                                 </div>
 
-                                <h3 className="text-3xl font-black mb-6 text-[#236a7c] leading-tight">{v.title}</h3>
+                                <h3 className="text-2xl font-black mb-4 text-[#236a7c] leading-tight">{v.title}</h3>
 
-                                <p className="text-[#334155] text-xl font-medium leading-relaxed mb-10 flex-grow max-w-md mx-auto">
+                                <p className="text-[#334155] text-lg font-medium leading-relaxed mb-8 flex-grow max-w-md mx-auto">
                                     {v.description}
                                 </p>
 
                                 {v.href && (
-                                    <div className="inline-flex items-center justify-center px-8 py-4 rounded-full bg-[#236a7c]/10 text-[#236a7c] font-extrabold text-lg group-hover:bg-[#236a7c] group-hover:text-white transition-all duration-300">
+                                    <div className="inline-flex items-center justify-center px-6 py-3 rounded-full bg-[#236a7c]/10 text-[#236a7c] font-extrabold text-base group-hover:bg-[#236a7c] group-hover:text-white transition-all duration-300">
                                         Read Study <span className="ml-2">→</span>
                                     </div>
                                 )}

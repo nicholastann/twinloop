@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FaFilm, FaLeaf, FaGlobeAmericas, FaChartLine, FaBolt, FaLayerGroup } from "react-icons/fa";
+import { FaFilm, FaLeaf, FaGlobeAmericas, FaChartLine, FaBolt, FaLayerGroup, FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import ScrollFadeUp from "./ui/ScrollFadeUp";
 
 const caseStudies = [
@@ -17,7 +17,12 @@ const caseStudies = [
         ],
         context: "We collected first-party data from 450 consumers using voice AI-moderated interviews and built personalized digital twins to test interest in upcoming theatrical releases.",
         findings: "Digital twins accurately captured market behavior structure, correctly distinguishing event films from mid-tier releases and identifying outliers.",
-        impact: "Strongly predicted real consumer behavior, aligning closely with box office results when awareness was incorporated."
+        testimonial: "Twinloop gave us an uncanny ability to foresee audience reactions before a single ticket was sold. It’s like having a crystal ball for box office performance.",
+        person: {
+            name: "Sarah Jenkins",
+            title: "VP of Strategy",
+            avatar: "/avatars/gbk.png"
+        }
     },
     {
         id: "rootlabs",
@@ -30,7 +35,12 @@ const caseStudies = [
         ],
         context: "Rootlabs needed a faster way to test creator-led content for their supplement brands. We built 200+ personalized digital twins representing their core audiences in under one week.",
         findings: "Used twins to test brand names, value props, and creator hooks without re-running research for every iteration.",
-        impact: "Enabled content iteration in days, not weeks, producing high-confidence messaging grounded in first-party consumer thinking."
+        testimonial: "We generated and tested hundreds of content variations in days. The speed aimed our creative direction with precision we’ve never seen before.",
+        person: {
+            name: "Alex Chen",
+            title: "Creative Director",
+            avatar: "/avatars/rootlabs.png"
+        }
     },
     {
         id: "nysom",
@@ -43,45 +53,62 @@ const caseStudies = [
         ],
         context: "Nysom needed deep consumer input to launch a sleep & wellness brand globally. We combined AI interviews with quantitative data to build a panel of 120 digital twins.",
         findings: "The team used the panel to test brand names, positioning statements, and different ways of framing sleep benefits.",
-        impact: "Allowed the team to explore multiple strategic directions quickly without re-fielding research, staying grounded in real consumer empathy."
+        testimonial: "Launching a global brand requires deep empathy. Twinloop helped us understand cultural nuances at scale, making our launch feel local everywhere.",
+        person: {
+            name: "Elena Ross",
+            title: "VP of Marketing",
+            avatar: "/avatars/nysom.png"
+        }
     }
 ];
 
 const UseCases: React.FC = () => {
     const [activeId, setActiveId] = useState(caseStudies[0].id);
     const activeCase = caseStudies.find(c => c.id === activeId) || caseStudies[0];
+    const currentIndex = caseStudies.findIndex(c => c.id === activeId);
+
+    const handleNext = () => {
+        const nextIndex = (currentIndex + 1) % caseStudies.length;
+        setActiveId(caseStudies[nextIndex].id);
+    };
+
+    const handlePrev = () => {
+        const prevIndex = (currentIndex - 1 + caseStudies.length) % caseStudies.length;
+        setActiveId(caseStudies[prevIndex].id);
+    };
 
     return (
-        <section className="py-32 bg-transparent relative">
+        <section className="py-12 bg-transparent relative">
             <div className="container mx-auto px-6 lg:px-8">
 
                 {/* Header */}
-                <div className="text-center mb-20">
+                <div className="text-center mb-10">
                     <ScrollFadeUp yOffset={20} duration={0.8} delay={0.1}>
-                        <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-[#0f172a] tracking-tight leading-tighter mb-6">
-                            Trusted by Leading <span className="text-[#236a7c]">Brands & Agencies</span>
+                        <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-[#0f172a] tracking-tight leading-tight mb-4">
+                            Rapid Feedback Loop Using <span className="text-[#236a7c]">Customer Digital Twins</span>
                         </h2>
-                        <p className="text-xl text-[#334155] max-w-2xl mx-auto">
+                        <p className="text-xl text-[#334155] max-w-4xl mx-auto whitespace-normal md:whitespace-nowrap font-medium">
                             From entertainment to wellness, see how diverse organizations use Twinloop to turn complexity into clarity.
                         </p>
                     </ScrollFadeUp>
                 </div>
 
-                <div className="flex flex-col lg:grid lg:grid-cols-12 gap-8 lg:gap-12 max-w-7xl mx-auto">
+                <div className="flex flex-col lg:grid lg:grid-cols-12 gap-8 lg:gap-10 max-w-7xl mx-auto">
 
                     {/* Menu / Selector Column */}
-                    <div className="lg:col-span-4 flex flex-col gap-4">
+                    {/* Menu / Selector Column */}
+                    <div className="hidden lg:flex lg:col-span-4 flex-col gap-6">
                         {caseStudies.map((study) => (
                             <button
                                 key={study.id}
                                 onClick={() => setActiveId(study.id)}
                                 className={`group relative p-6 rounded-2xl text-left transition-all duration-300 border ${activeId === study.id
-                                    ? "bg-white shadow-[0_8px_30px_rgba(35,106,124,0.15)] border-[#236a7c]/20"
+                                    ? "bg-white shadow-[0_8px_30px_rgba(35,106,124,0.15)] border-[#236a7c]/20 scale-[1.02]"
                                     : "bg-white/40 hover:bg-white/60 border-transparent hover:border-[#236a7c]/10"
                                     }`}
                             >
-                                <div className="flex items-center gap-4">
-                                    <div className={`p-2 rounded-xl text-xl transition-colors duration-300 h-16 w-16 flex items-center justify-center ${activeId === study.id ? "bg-white border border-[#236a7c]/10" : "bg-white/80"
+                                <div className="flex items-center gap-5">
+                                    <div className={`p-3 rounded-2xl text-2xl transition-colors duration-300 h-16 w-16 flex items-center justify-center ${activeId === study.id ? "bg-white border border-[#236a7c]/10" : "bg-white/80"
                                         }`}>
                                         <img
                                             src={study.logo}
@@ -90,10 +117,10 @@ const UseCases: React.FC = () => {
                                         />
                                     </div>
                                     <div>
-                                        <h3 className={`font-bold text-lg leading-tight mb-1 transition-colors ${activeId === study.id ? "text-[#0f172a]" : "text-[#334155]"}`}>
+                                        <h3 className={`font-black text-xl leading-tight mb-1.5 transition-colors ${activeId === study.id ? "text-[#0f172a]" : "text-[#334155]"}`}>
                                             {study.company}
                                         </h3>
-                                        <p className="text-sm text-[#236a7c] font-medium opacity-80 uppercase tracking-wider">
+                                        <p className="text-sm text-[#236a7c] font-bold opacity-90 uppercase tracking-wider">
                                             {study.title}
                                         </p>
                                     </div>
@@ -111,7 +138,11 @@ const UseCases: React.FC = () => {
                     </div>
 
                     {/* Detailed Display Column */}
-                    <div className="lg:col-span-8 relative min-h-[500px]">
+                    <div className="lg:col-span-8 relative min-h-[600px]">
+                        {/* Mobile Arrows */}
+                        <button onClick={handlePrev} className="md:hidden absolute left-0 top-1/2 -translate-y-1/2 z-30 p-2 text-[#236a7c]/50 hover:text-[#236a7c] -ml-4"><FaChevronLeft size={24} /></button>
+                        <button onClick={handleNext} className="md:hidden absolute right-0 top-1/2 -translate-y-1/2 z-30 p-2 text-[#236a7c]/50 hover:text-[#236a7c] -mr-4"><FaChevronRight size={24} /></button>
+
                         <AnimatePresence mode="wait">
                             <motion.div
                                 key={activeCase.id}
@@ -119,43 +150,46 @@ const UseCases: React.FC = () => {
                                 animate={{ opacity: 1, x: 0 }}
                                 exit={{ opacity: 0, x: -20 }}
                                 transition={{ duration: 0.4, ease: "easeOut" }}
-                                className="h-full"
+                                drag="x"
+                                dragConstraints={{ left: 0, right: 0 }}
+                                dragElastic={0.2}
+                                onDragEnd={(e, { offset, velocity }) => {
+                                    const swipe = offset.x;
+                                    if (swipe < -50) handleNext();
+                                    else if (swipe > 50) handlePrev();
+                                }}
+                                className="h-full cursor-grab active:cursor-grabbing"
                             >
-                                <div className="h-full bg-white/70 backdrop-blur-xl rounded-[2.5rem] border border-white/60 p-8 md:p-12 shadow-[0_20px_60px_rgba(35,106,124,0.08)] relative overflow-hidden">
+                                <div className="h-full bg-white/70 backdrop-blur-xl rounded-[3rem] border border-white/60 p-10 md:p-12 shadow-[0_20px_60px_rgba(35,106,124,0.08)] relative overflow-hidden flex flex-col justify-between">
 
                                     {/* Decorative Gradient Blob */}
                                     <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-[#236a7c]/5 to-[#b8dce7]/10 rounded-full blur-3xl -mr-20 -mt-20 pointer-events-none" />
 
                                     {/* Top Row: company + Stats */}
-                                    <div className="flex flex-col md:flex-row md:items-start justify-between gap-8 mb-10 relative z-10">
-                                        <div>
-                                            <div className="flex items-center gap-3 mb-4">
-                                                <span className="px-3 py-1 rounded-full bg-[#236a7c]/10 text-[#236a7c] text-xs font-black uppercase tracking-widest border border-[#236a7c]/10">
-                                                    Case Study
-                                                </span>
-                                            </div>
-                                            <div className="flex items-center gap-4 mb-2">
-                                                <img
-                                                    src={activeCase.logo}
-                                                    alt={`${activeCase.company} logo`}
-                                                    className="w-10 h-10 object-contain"
-                                                />
-                                                <h3 className="text-3xl md:text-4xl font-black text-[#0f172a]">
+                                    <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 md:gap-8 mb-10 relative z-10 border-b border-gray-100/50 pb-8">
+                                        <div className="flex items-center gap-6">
+                                            <img
+                                                src={activeCase.logo}
+                                                alt={`${activeCase.company} logo`}
+                                                className="w-16 h-16 object-contain"
+                                            />
+                                            <div>
+                                                <h3 className="text-3xl md:text-5xl font-black text-[#0f172a] leading-none mb-2">
                                                     {activeCase.company}
                                                 </h3>
+                                                <p className="text-xl text-[#334155] font-bold leading-none mt-1">
+                                                    {activeCase.title}
+                                                </p>
                                             </div>
-                                            <p className="text-xl text-[#334155] font-medium">
-                                                {activeCase.title}
-                                            </p>
                                         </div>
 
-                                        <div className="flex gap-4 md:gap-8">
+                                        <div className="flex gap-10">
                                             {activeCase.stats.map((stat, i) => (
                                                 <div key={i} className="text-right">
-                                                    <div className="text-2xl md:text-3xl font-black text-[#236a7c] tracking-tight">
+                                                    <div className="text-2xl md:text-4xl font-black text-[#236a7c] tracking-tight leading-none mb-1">
                                                         {stat.value}
                                                     </div>
-                                                    <div className="text-xs font-bold text-[#334155]/60 uppercase tracking-wider">
+                                                    <div className="text-xs md:text-sm font-black text-[#334155]/60 uppercase tracking-widest">
                                                         {stat.label}
                                                     </div>
                                                 </div>
@@ -164,47 +198,66 @@ const UseCases: React.FC = () => {
                                     </div>
 
                                     {/* Content Grid */}
-                                    <div className="grid md:grid-cols-2 gap-8 md:gap-12 relative z-10">
-                                        <div className="space-y-6">
-                                            <div>
-                                                <h4 className="flex items-center gap-2 text-sm font-black text-[#0f172a] uppercase tracking-widest mb-3">
-                                                    <FaLayerGroup className="text-[#236a7c]" /> Context
+                                    <div className="grid md:grid-cols-2 gap-10 relative z-10 flex-grow">
+                                        <div className="space-y-8 flex flex-col justify-center">
+                                            <div className="bg-white/50 p-6 rounded-3xl border border-white/60">
+                                                <h4 className="flex items-center gap-3 text-sm font-black text-[#0f172a] uppercase tracking-widest mb-3">
+                                                    <FaLayerGroup className="text-[#236a7c]" size={14} /> Context
                                                 </h4>
-                                                <p className="text-[#334155] leading-relaxed">
+                                                <p className="text-base text-[#334155] leading-relaxed font-medium">
                                                     {activeCase.context}
                                                 </p>
                                             </div>
 
-                                            <div>
-                                                <h4 className="flex items-center gap-2 text-sm font-black text-[#0f172a] uppercase tracking-widest mb-3">
-                                                    <FaChartLine className="text-[#236a7c]" /> Findings
+                                            <div className="bg-white/50 p-6 rounded-3xl border border-white/60">
+                                                <h4 className="flex items-center gap-3 text-sm font-black text-[#0f172a] uppercase tracking-widest mb-3">
+                                                    <FaChartLine className="text-[#236a7c]" size={14} /> Findings
                                                 </h4>
-                                                <p className="text-[#334155] leading-relaxed">
+                                                <p className="text-base text-[#334155] leading-relaxed font-medium">
                                                     {activeCase.findings}
                                                 </p>
                                             </div>
                                         </div>
 
-                                        <div className="bg-[#f8fafc]/80 rounded-3xl p-8 border border-white/50 flex flex-col justify-center">
-                                            <h4 className="flex items-center gap-2 text-sm font-black text-[#0f172a] uppercase tracking-widest mb-4">
-                                                <span className="w-2 h-2 rounded-full bg-[#236a7c]" /> Impact
-                                            </h4>
-                                            <p className="text-lg font-medium text-[#236a7c] italic leading-relaxed mb-6">
-                                                {activeCase.impact}
-                                            </p>
-
-                                            <div className="mt-auto pt-4 border-t border-[#236a7c]/10 flex items-center gap-2 text-sm text-[#334155]/60 font-semibold">
-                                                <div className="w-5 h-5 rounded-full bg-[#236a7c] flex items-center justify-center text-white text-xs">
-                                                    ✓
+                                        <div className="bg-[#f8fafc] rounded-3xl p-8 border border-[#e2e8f0] flex flex-col justify-center">
+                                            <div className="flex items-center gap-5 mb-6">
+                                                <img
+                                                    src={activeCase.person.avatar}
+                                                    alt={activeCase.person.name}
+                                                    className="w-14 h-14 rounded-full object-cover border-2 border-white shadow-md"
+                                                />
+                                                <div>
+                                                    <h4 className="text-[#0f172a] font-black text-lg leading-tight">
+                                                        {activeCase.person.name}
+                                                    </h4>
+                                                    <p className="text-[#334155]/70 text-sm font-bold">
+                                                        {activeCase.person.title}
+                                                    </p>
                                                 </div>
-                                                Verified Result
                                             </div>
+
+                                            <p className="text-xl font-medium text-[#236a7c] italic leading-relaxed">
+                                                "{activeCase.testimonial}"
+                                            </p>
                                         </div>
                                     </div>
 
                                 </div>
                             </motion.div>
                         </AnimatePresence>
+
+                        {/* Mobile Dots */}
+                        <div className="flex md:hidden justify-center gap-2 mt-6">
+                            {caseStudies.map((_, i) => (
+                                <button
+                                    key={i}
+                                    onClick={() => {
+                                        setActiveId(caseStudies[i].id);
+                                    }}
+                                    className={`w-2 h-2 rounded-full transition-all ${i === currentIndex ? "bg-[#236a7c] w-6" : "bg-[#236a7c]/20"}`}
+                                />
+                            ))}
+                        </div>
                     </div>
                 </div>
             </div>

@@ -4,10 +4,10 @@ import React from "react";
 
 const Navbar: React.FC = () => {
   return (
-    <nav className="w-full py-4 px-8 flex justify-between items-center bg-white/70 backdrop-blur-xl border-b border-white/20 fixed top-0 z-50 transition-all duration-300">
+    <nav className="w-full py-2 px-8 flex justify-between items-center bg-white/70 backdrop-blur-xl border-b border-white/20 fixed top-0 z-50 transition-all duration-300">
 
       {/* Logo / Brand */}
-      <img src="/twinloop.png" alt="Twinloop Logo" className="h-10 w-auto" />
+      <img src="/twinloop.png" alt="Twinloop Logo" className="h-8 w-auto" />
 
       {/* Desktop Menu */}
       <ul className="hidden md:flex space-x-8 text-[#0f1a1f] font-medium">
