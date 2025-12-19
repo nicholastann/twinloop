@@ -14,7 +14,7 @@ const CountUp = ({ value, label }: { value: string; label: string }) => {
     // Check if it's a fraction like "1/10th"
     const isFraction = value.includes("/");
 
-    const count = useSpring(0, { duration: 2000 });
+    const count = useSpring(0, { stiffness: 30, damping: 15 });
     const rounded = useTransform(count, (latest) => {
         if (isFraction) return value; // Don't animate complex strings like 1/10th for now, or handle specifically
         return `${Math.round(latest)}${suffix}`;
@@ -40,10 +40,10 @@ const CountUp = ({ value, label }: { value: string; label: string }) => {
 
 const StatsBanner: React.FC = () => {
     const stats = [
-        { value: "1/10th", label: "The time to insight" },
+        { value: "1/10th", label: "Time to insight" },
         { value: "80%", label: "More affordable" },
         { value: "10x", label: "Scale of testing" },
-        { value: "24/7", label: "Always-on availability" },
+        { value: "24/7", label: "Availability" },
     ];
 
     return (

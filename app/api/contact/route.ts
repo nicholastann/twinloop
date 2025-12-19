@@ -52,7 +52,7 @@ export async function POST(request: Request) {
         if (process.env.SMTP_USER && process.env.SMTP_PASS) {
             try {
                 await transporter.sendMail(mailOptions);
-                console.log("Email sent successfully to ndtann@proton.me");
+                console.log("Email sent successfully to nick@pyxis.ai");
             } catch (emailError) {
                 console.error("Failed to send email:", emailError);
                 // We don't fail the request if email fails, but we log it.

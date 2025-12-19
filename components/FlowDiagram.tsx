@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import React, { useState, useEffect, useRef } from "react";
+import { motion, AnimatePresence, useInView } from "framer-motion";
 import { FaMicrophone, FaUserFriends, FaRocket, FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 const steps = [
@@ -57,6 +57,8 @@ const slideVariants = {
 const HowItWorksDisplay: React.FC = () => {
   const [activeStep, setActiveStep] = useState(0);
   const [direction, setDirection] = useState(0);
+  const containerRef = useRef(null);
+  const isInView = useInView(containerRef, { once: true, margin: "-100px" });
 
   const handleNext = () => {
     setDirection(1);
@@ -68,16 +70,17 @@ const HowItWorksDisplay: React.FC = () => {
     setActiveStep((prev) => (prev - 1 + steps.length) % steps.length);
   };
 
-  // Auto-advance timer - resets on manual interaction
+  // Auto-advance timer - only runs when in view
   useEffect(() => {
+    if (!isInView) return;
     const timer = setInterval(() => {
       handleNext();
     }, 10000); // 10 seconds
     return () => clearInterval(timer);
-  }, [activeStep]);
+  }, [activeStep, isInView]);
 
   return (
-    <section className="container mx-auto px-6 lg:px-8 relative">
+    <section ref={containerRef} className="container mx-auto px-6 lg:px-8 relative">
       <div className="flex flex-col gap-8">
 
         {/* Step Navigation - Horizontal Pills */}
@@ -89,9 +92,9 @@ const HowItWorksDisplay: React.FC = () => {
                 setDirection(index > activeStep ? 1 : -1);
                 setActiveStep(index);
               }}
-              className={`relative px-10 py-6 rounded-full text-sm font-bold uppercase tracking-widest transition-all duration-500 overflow-hidden group mb-1 cursor-pointer ${activeStep === index
-                ? "text-white shadow-[0_10px_30px_rgba(35,106,124,0.3)] scale-105"
-                : "bg-white/50 text-[#334155] border border-white/60 hover:bg-white hover:scale-105"
+              className={`relative px-8 md:px-10 py-5 md:py-6 rounded-full text-sm font-bold uppercase tracking-widest transition-all duration-300 overflow-hidden group mb-1 cursor-pointer border select-none ${activeStep === index
+                ? "text-white border-transparent shadow-[0_10px_30px_rgba(35,106,124,0.4)] scale-105 z-10"
+                : "bg-white border-gray-200 text-slate-500 hover:text-slate-800 hover:border-slate-300 hover:shadow-lg hover:-translate-y-0.5"
                 }`}
             >
               {activeStep === index && (

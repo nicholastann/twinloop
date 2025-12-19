@@ -1,11 +1,11 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
     FaCommentDots, FaMapMarkerAlt, FaLightbulb, FaUsers,
     FaBoxOpen, FaTags, FaSignature, FaClipboardCheck, FaChevronLeft, FaChevronRight
 } from "react-icons/fa";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useInView } from "framer-motion";
 import ScrollFadeUp from "./ui/ScrollFadeUp";
 
 const USE_CASES = [
@@ -24,7 +24,6 @@ const USE_CASES = [
             "“I’d rate clarity an 8 out of 10 because I understand the benefit in one read.”",
             "“I’m skeptical because the claim feels strong, but you are not showing me what makes it true.”",
             "“This sounds like category language, so I’m not sure what makes you different.”",
-            "“If you add one concrete proof point, I’d feel a lot more comfortable taking you seriously.”",
         ],
         simulation: [
             "Clarity scored 8.4/10, but credibility lagged at 6.1/10.",
@@ -206,6 +205,8 @@ const USE_CASES = [
 const VennDiagramSection: React.FC = () => {
     const [activeIndex, setActiveIndex] = useState(0);
     const [direction, setDirection] = useState(0);
+    const containerRef = useRef(null);
+    const isInView = useInView(containerRef, { once: true, margin: "-100px" });
 
     const handleNext = () => {
         setDirection(1);
@@ -218,13 +219,15 @@ const VennDiagramSection: React.FC = () => {
     };
 
     // Auto-advance timer
+    // Auto-advance timer (only when in view)
     useEffect(() => {
+        if (!isInView) return;
         const interval = setInterval(() => {
             handleNext();
         }, 10000); // 10 seconds per slide
 
         return () => clearInterval(interval);
-    }, [activeIndex]);
+    }, [activeIndex, isInView]);
 
     const activeCase = USE_CASES[activeIndex];
 
@@ -267,7 +270,7 @@ const VennDiagramSection: React.FC = () => {
     };
 
     return (
-        <section className="py-12 bg-transparent overflow-hidden">
+        <section ref={containerRef} className="py-12 bg-transparent overflow-hidden">
             <div className="container mx-auto px-6 lg:px-8 text-center">
 
                 {/* --- Section Header --- */}

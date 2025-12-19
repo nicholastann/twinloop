@@ -122,9 +122,9 @@ const UseCases: React.FC = () => {
                                     setDirection(index > currentIndex ? 1 : -1);
                                     setActiveId(study.id);
                                 }}
-                                className={`group relative p-6 rounded-2xl text-left transition-all duration-300 border cursor-pointer ${activeId === study.id
-                                    ? "bg-white shadow-[0_8px_30px_rgba(35,106,124,0.15)] border-[#236a7c]/20 scale-[1.02]"
-                                    : "bg-white/40 hover:bg-white/60 border-transparent hover:border-[#236a7c]/10"
+                                className={`group relative p-6 rounded-2xl text-left transition-all duration-300 border cursor-pointer select-none ${activeId === study.id
+                                    ? "bg-white shadow-[0_8px_30px_rgba(35,106,124,0.15)] border-[#236a7c]/20 scale-[1.02] z-10"
+                                    : "bg-white border-gray-200 shadow-sm hover:shadow-xl hover:border-gray-300 hover:-translate-y-1"
                                     }`}
                             >
                                 <div className="flex items-center gap-5">
