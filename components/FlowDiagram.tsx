@@ -118,7 +118,7 @@ const HowItWorksDisplay: React.FC = () => {
           <button onClick={handlePrev} className="md:hidden absolute left-0 top-[40%] -translate-y-1/2 z-30 p-2 text-[#236a7c]/50 hover:text-[#236a7c]"><FaChevronLeft size={24} /></button>
           <button onClick={handleNext} className="md:hidden absolute right-0 top-[40%] -translate-y-1/2 z-30 p-2 text-[#236a7c]/50 hover:text-[#236a7c]"><FaChevronRight size={24} /></button>
 
-          <div className="grid lg:grid-cols-2 gap-4 lg:gap-24 items-center max-w-7xl mx-auto px-8 md:px-0">
+          <div className="grid lg:grid-cols-[0.7fr_1.3fr] gap-4 lg:gap-12 items-center max-w-7xl mx-auto px-0 md:px-0">
 
             {/* Text Content with Framer Motion */}
             <div className="text-center lg:text-left order-1 lg:order-1 py-4 md:py-8">
@@ -157,11 +157,16 @@ const HowItWorksDisplay: React.FC = () => {
             </div>
 
             {/* Image / Graphic Display */}
-            <div className="relative order-2 lg:order-2 w-full aspect-[4/3] md:aspect-[16/10] lg:aspect-[1/1]">
+            {/* Image / Graphic Display */}
+            <div className="relative order-2 lg:order-2 w-full h-[400px] md:h-[550px] lg:h-[620px] flex items-center justify-center">
               {/* Background Glow */}
               <div className="absolute inset-0 bg-gradient-to-tr from-[#236a7c]/20 to-[#b8dce7]/30 blur-3xl rounded-full scale-110 pointer-events-none animate-pulse" />
 
-              <div className="relative w-full h-full bg-white/40 backdrop-blur-xl rounded-[2rem] border border-white/60 shadow-[0_30px_60px_rgba(0,0,0,0.05)] overflow-hidden group">
+              <motion.div
+                layout
+                className="relative w-auto h-auto bg-white/40 backdrop-blur-xl rounded-[2rem] border border-white/60 shadow-[0_30px_60px_rgba(0,0,0,0.05)] overflow-hidden group"
+                transition={{ duration: 0.4 }}
+              >
                 <AnimatePresence mode="wait" custom={direction} initial={false}>
                   <motion.img
                     key={activeStep}
@@ -180,12 +185,12 @@ const HowItWorksDisplay: React.FC = () => {
                       if (offset.x < -50) handleNext();
                       else if (offset.x > 50) handlePrev();
                     }}
-                    className="w-full h-full object-contain cursor-grab active:cursor-grabbing"
+                    className="block w-auto h-auto max-h-[390px] md:max-h-[540px] lg:max-h-[610px] max-w-full object-contain cursor-grab active:cursor-grabbing"
                   />
                 </AnimatePresence>
                 {/* Glass Reflection */}
                 <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent pointer-events-none rounded-[2rem]" />
-              </div>
+              </motion.div>
             </div>
 
           </div>
