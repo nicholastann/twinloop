@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FaFilm, FaLeaf, FaGlobeAmericas, FaChartLine, FaBolt, FaLayerGroup, FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import { FaChartLine, FaLayerGroup, FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import ScrollFadeUp from "./ui/ScrollFadeUp";
 
 const caseStudies = [
@@ -33,13 +33,13 @@ const caseStudies = [
             { label: "Speed", value: "<1 Week" },
             { label: "Twins", value: "200+" },
         ],
-        context: "Rootlabs needed a faster way to test creator-led content for their supplement brands. We built 200+ personalized digital twins representing their core audiences in under one week.",
-        findings: "Used twins to test brand names, value props, and creator hooks without re-running research for every iteration.",
-        testimonial: "We generated and tested hundreds of content variations in days. The speed aimed our creative direction with precision we’ve never seen before.",
+        context: "Rootlabs needed a faster way to test creator-led content on TikTok for their hair supplement brand. Twinloop built 200+ personalized digital twins representing their core audience of hair growth supplement shoppers via TikTok Shop using AI-moderated voice interviews.",
+        findings: "Rootlabs now uses the digital twin panel to pressure-test video, image and text assets centered on creator scripts and hooks and surface fresh content ideass without re-running research for every iteration.",
+        testimonial: "We were running out of ideas and guessing what would work next. Twinloop gave us a repeatable way to test TikTok creator scripts and generate new angles without starting from scratch every time.",
         person: {
-            name: "Alex Chen",
-            title: "Creative Director",
-            avatar: "/avatars/rootlabs.png"
+            name: "Mayank Kumar",
+            title: "CEO",
+            avatar: "/avatars/mayank.png"
         }
     },
     {
