@@ -83,6 +83,19 @@ const Hero: React.FC = () => {
   // Ref to track if we are currently manually scrolling to debounce or throttle
   const lastScrollTime = useRef(0);
 
+  // --- Check Session Storage for Refresh Logic ---
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const hasSeen = sessionStorage.getItem("twinloop_hero_seen");
+      if (hasSeen) {
+        setStep(6);
+        setPileIndex(ARTICLE_DATA.length);
+      } else {
+        sessionStorage.setItem("twinloop_hero_seen", "true");
+      }
+    }
+  }, []);
+
   // --- Animation Sequence Timers ---
   useEffect(() => {
     let timer: NodeJS.Timeout;

@@ -39,7 +39,7 @@ const caseStudies = [
         person: {
             name: "Mayank Kumar",
             title: "CEO",
-            avatar: "/avatars/mayank.png"
+            avatar: "/avatars/mayank.jpg"
         }
     },
     {
