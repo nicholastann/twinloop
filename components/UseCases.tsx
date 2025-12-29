@@ -9,7 +9,7 @@ const caseStudies = [
     {
         id: "gbk",
         company: "GBK Collective",
-        title: "A Force Multiplier for Modern Research Firms",
+        title: "Force Multiplier for Modern Research Firms",
         logo: "/companyLogos/gbk.png",
         stats: [],
         context: "GBK Collective is an empirically driven strategic insights firm working on thoughtfully leveraging AI – to amplify client outcomes and improve internal productivity. They piloted Twinloop across multiple workflows – including AI-moderated voice interviews, digital twins, and qualitative analysis – to increase speed and depth without sacrificing rigor.",
@@ -229,7 +229,7 @@ const UseCases: React.FC = () => {
 
                                             <div className="bg-white/50 p-5 md:p-6 rounded-2xl md:rounded-3xl border border-white/60">
                                                 <h4 className="flex items-center gap-2 md:gap-3 text-xs md:text-sm font-black text-[#0f172a] uppercase tracking-widest mb-2 md:mb-3">
-                                                    <FaChartLine className="text-[#236a7c]" size={14} /> Findings
+                                                    <FaChartLine className="text-[#236a7c]" size={14} /> Outcome
                                                 </h4>
                                                 <p className="text-sm md:text-base text-[#334155] leading-relaxed font-medium">
                                                     {activeCase.findings}
