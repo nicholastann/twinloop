@@ -9,19 +9,16 @@ const caseStudies = [
     {
         id: "gbk",
         company: "GBK Collective",
-        title: "Predicting Movie Success",
+        title: "A Force Multiplier for Modern Research Firms",
         logo: "/companyLogos/gbk.png",
-        stats: [
-            { label: "Correlation", value: "0.93" },
-            { label: "Twin Panel", value: "450" },
-        ],
-        context: "We collected first-party data from 450 consumers using voice AI-moderated interviews and built personalized digital twins to test interest in upcoming theatrical releases.",
-        findings: "Digital twins accurately captured market behavior structure, correctly distinguishing event films from mid-tier releases and identifying outliers.",
-        testimonial: "Twinloop gave us an uncanny ability to foresee audience reactions before a single ticket was sold. It’s like having a crystal ball for box office performance.",
+        stats: [],
+        context: "GBK Collective is an empirically driven strategic insights firm working on thoughtfully leveraging AI – to amplify client outcomes and improve internal productivity. They piloted Twinloop across multiple workflows – including AI-moderated voice interviews, digital twins, and qualitative analysis – to increase speed and depth without sacrificing rigor.",
+        findings: "Twinloop’s AI-moderated interview experience was rated #1 by panelists when tested against four other insights tools. GBK saw significantly deeper qualitative input from voice-moderated surveys versus traditional text-based methods, with respondents contributing multiple times more detail enhancing the foundation for high-fidelity digital twins. In a box office prediction pilot, a panel of 450 digital twins showed very promising results, accurately distinguishing event films from mid-tier releases and highlighting meaningful outliers consistent with market performance, reinforcing confidence in the twins’ ability to reflect real consumer signals.",
+        testimonial: "Twinloop has proven to be a thoughtful and flexible partner throughout our work together. Our partnership has been grounded in careful experimentation and methodological rigor. Their team was scrappy in execution, highly receptive to our academic perspectives, and collaborative in designing research that tested where AI-driven approaches add value while maintaining our emphasis on research rigor. Twinloop continues to be a strong partner in helping us responsibly explore the frontier of AI in research while innovatively supplementing our established human-centered research methods to expand our offering to key clients.",
         person: {
-            name: "Sarah Jenkins",
-            title: "VP of Strategy",
-            avatar: "/avatars/gbk.png"
+            name: "Jared Piraneo",
+            title: "SVP Research & Insights",
+            avatar: "/avatars/gbk.jpeg"
         }
     },
     {
