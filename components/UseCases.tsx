@@ -41,20 +41,20 @@ const caseStudies = [
     },
     {
         id: "nysom",
-        company: "Nysom",
-        title: "Global Brand Launch",
+        company: "NYSOM",
+        title: "Building a Global Sleep Brand",
         logo: "/companyLogos/nysom.png",
         stats: [
-            { label: "Panel Size", value: "120" },
-            { label: "Market", value: "Global" },
+            { label: "Customer Twins", value: "120" },
+            { label: "Time To Insight", value: "22 hrs" },
         ],
-        context: "Nysom needed deep consumer input to launch a sleep & wellness brand globally. We combined AI interviews with quantitative data to build a panel of 120 digital twins.",
-        findings: "The team used the panel to test brand names, positioning statements, and different ways of framing sleep benefits.",
-        testimonial: "Launching a global brand requires deep empathy. Twinloop helped us understand cultural nuances at scale, making our launch feel local everywhere.",
+        context: "NYSOM was launching a sleep & wellness brand from India to a global audience. Twinloop combined AI-moderated voice interviews with quantitative data to build a panel of 120 digital twins.",
+        findings: "NYSOM now uses the twin panel as an always-on thought partner to pressure-test brand decisions in real time — name, value proposition, messaging, website, and more — before committing spend.",
+        testimonial: `This is incredible!"\n\n"I'm truly feeling the power of AI.`,
         person: {
-            name: "Elena Ross",
-            title: "VP of Marketing",
-            avatar: "/avatars/nysom.png"
+            name: "Sonam Aron",
+            title: "Sales and Marketing Leader",
+            avatar: "/avatars/nysom.jpg"
         }
     }
 ];
@@ -254,7 +254,7 @@ const UseCases: React.FC = () => {
                                                 </div>
                                             </div>
 
-                                            <p className="text-lg md:text-xl font-medium text-[#236a7c] italic leading-relaxed">
+                                            <p className="text-lg md:text-xl font-medium text-[#236a7c] italic leading-relaxed whitespace-pre-line">
                                                 "{activeCase.testimonial}"
                                             </p>
                                         </div>

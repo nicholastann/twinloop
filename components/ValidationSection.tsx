@@ -27,7 +27,7 @@ const ValidationSection: React.FC = () => {
                 <div className="text-center mb-12">
                     <ScrollFadeUp yOffset={20} duration={0.8} delay={0.1}>
                         <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-[#0f172a] tracking-tight leading-tight mb-6">
-                            Predictive Power.<br /><span className="text-[#236a7c]">Proven Performance.</span>
+                            Our digital Twin Methodology is Informed by<br /><span className="text-[#236a7c]">Published Academic Research.</span>
                         </h2>
                     </ScrollFadeUp>
                 </div>
