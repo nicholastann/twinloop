@@ -50,7 +50,7 @@ const caseStudies = [
         ],
         context: "NYSOM was launching a sleep & wellness brand from India to a global audience. Twinloop combined AI-moderated voice interviews with quantitative data to build a panel of 120 digital twins.",
         findings: "NYSOM now uses the twin panel as an always-on thought partner to pressure-test brand decisions in real time — name, value proposition, messaging, website, and more — before committing spend.",
-        testimonial: `This is incredible!"\n\n"I'm truly feeling the power of AI.`,
+        testimonial: `This is incredible! I'm truly feeling the power of AI.`,
         person: {
             name: "Sonam Aron",
             title: "Sales and Marketing Leader",
