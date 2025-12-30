@@ -86,6 +86,14 @@ const Hero: React.FC = () => {
   // --- Check Session Storage for Refresh Logic ---
   useEffect(() => {
     if (typeof window !== "undefined") {
+      // Fix: If user is scrolled down (e.g. refresh), skip animation and don't lock
+      if (window.scrollY > 50) {
+        setStep(6);
+        setPileIndex(ARTICLE_DATA.length);
+        sessionStorage.setItem("twinloop_hero_seen", "true");
+        return;
+      }
+
       const hasSeen = sessionStorage.getItem("twinloop_hero_seen");
       if (hasSeen) {
         setStep(6);
@@ -231,7 +239,10 @@ const Hero: React.FC = () => {
     // Lock body scroll logic
     // Lock body scroll logic
     const isMobile = window.innerWidth < 768;
-    if (step < 6 && !isMobile) {
+    // Safety: If already scrolled down, do not lock (fixes refresh issue)
+    const isScrolled = window.scrollY > 50;
+
+    if (step < 6 && !isMobile && !isScrolled) {
       document.body.style.overflow = "hidden";
       window.addEventListener("wheel", handleWheel, { passive: false });
       window.addEventListener("touchstart", handleTouchStart, { passive: false });

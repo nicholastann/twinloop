@@ -97,7 +97,7 @@ const UseCases: React.FC = () => {
 
     return (
         <section className="py-12 bg-transparent relative">
-            <div className="container mx-auto px-6 lg:px-8">
+            <div className="w-full max-w-[1400px] 2xl:max-w-[1600px] mx-auto px-6 lg:px-8">
 
                 {/* Header */}
                 <div className="text-center mb-10">
@@ -108,10 +108,29 @@ const UseCases: React.FC = () => {
                     </ScrollFadeUp>
                 </div>
 
-                <div className="flex flex-col lg:grid lg:grid-cols-12 gap-8 lg:gap-10 max-w-7xl mx-auto">
+                <div className="flex flex-col lg:grid lg:grid-cols-12 gap-8 lg:gap-10 w-full mx-auto">
 
-                    {/* Menu / Selector Column */}
-                    <div className="hidden lg:flex lg:col-span-4 flex-col gap-6">
+                    {/* Mobile Navigation Pills */}
+                    <div className="lg:hidden flex flex-wrap justify-center gap-2 mb-6 px-2">
+                        {caseStudies.map((study, index) => (
+                            <button
+                                key={study.id}
+                                onClick={() => {
+                                    setDirection(index > currentIndex ? 1 : -1);
+                                    setActiveId(study.id);
+                                }}
+                                className={`flex-shrink-0 px-4 py-2 rounded-full text-[10px] font-black uppercase tracking-widest transition-all duration-300 border ${activeId === study.id
+                                    ? "bg-[#236a7c] text-white border-transparent shadow-md scale-105"
+                                    : "bg-white border-gray-200 text-[#334155]/60"
+                                    }`}
+                            >
+                                {study.company}
+                            </button>
+                        ))}
+                    </div>
+
+                    {/* Menu / Selector Column (Desktop) */}
+                    <div className="hidden lg:flex lg:col-span-3 flex-col gap-6">
                         {caseStudies.map((study, index) => (
                             <button
                                 key={study.id}
@@ -155,7 +174,7 @@ const UseCases: React.FC = () => {
                     </div>
 
                     {/* Detailed Display Column */}
-                    <div className="lg:col-span-8 relative min-h-[600px]">
+                    <div className="lg:col-span-9 relative min-h-[600px]">
                         {/* Mobile Arrows */}
                         <button onClick={handlePrev} className="md:hidden absolute left-0 top-1/2 -translate-y-1/2 z-30 p-2 text-[#236a7c]/50 hover:text-[#236a7c] -ml-4"><FaChevronLeft size={24} /></button>
                         <button onClick={handleNext} className="md:hidden absolute right-0 top-1/2 -translate-y-1/2 z-30 p-2 text-[#236a7c]/50 hover:text-[#236a7c] -mr-4"><FaChevronRight size={24} /></button>
@@ -254,7 +273,7 @@ const UseCases: React.FC = () => {
                                                 </div>
                                             </div>
 
-                                            <p className="text-lg md:text-xl font-medium text-[#236a7c] italic leading-relaxed whitespace-pre-line">
+                                            <p className="text-sm md:text-base font-medium text-[#236a7c] italic leading-relaxed whitespace-pre-line">
                                                 "{activeCase.testimonial}"
                                             </p>
                                         </div>

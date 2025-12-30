@@ -115,8 +115,8 @@ const HowItWorksDisplay: React.FC = () => {
         {/* Dynamic Display Area */}
         <div className="relative">
           {/* Arrows (Mobile) */}
-          <button onClick={handlePrev} className="md:hidden absolute left-0 top-[40%] -translate-y-1/2 z-30 p-2 text-[#236a7c]/50 hover:text-[#236a7c]"><FaChevronLeft size={24} /></button>
-          <button onClick={handleNext} className="md:hidden absolute right-0 top-[40%] -translate-y-1/2 z-30 p-2 text-[#236a7c]/50 hover:text-[#236a7c]"><FaChevronRight size={24} /></button>
+          <button onClick={handlePrev} className="md:hidden absolute left-0 top-[65px] -translate-y-1/2 z-30 p-2 text-[#236a7c]/50 hover:text-[#236a7c]"><FaChevronLeft size={24} /></button>
+          <button onClick={handleNext} className="md:hidden absolute right-0 top-[65px] -translate-y-1/2 z-30 p-2 text-[#236a7c]/50 hover:text-[#236a7c]"><FaChevronRight size={24} /></button>
 
           <div className="grid lg:grid-cols-[0.7fr_1.3fr] gap-4 lg:gap-12 items-center max-w-7xl mx-auto px-0 md:px-0">
 

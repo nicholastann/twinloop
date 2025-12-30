@@ -245,7 +245,7 @@ const VennDiagramSection: React.FC = () => {
             scale: diff === 0 ? 1 : 0.7,
             opacity: isVisible ? (diff === 0 ? 1 : 0.4) : 0,
             zIndex: diff === 0 ? 20 : 10,
-            rotateY: diff * -15, // Slight 3D rotation effect
+            // rotateY: diff * -15, // Removed to prevent Safari flickering
         };
     };
 
@@ -300,16 +300,20 @@ const VennDiagramSection: React.FC = () => {
                         return (
                             <motion.div
                                 key={item.id}
-                                className="absolute top-1/2 left-1/2 w-0 h-0 flex flex-col items-center justify-center cursor-pointer"
+                                // Fix: Use fixed dimensions + negative margins to center, avoid w-0 h-0 which confuses Safari
+                                className="absolute top-1/2 left-1/2 w-64 h-40 -ml-32 -mt-20 flex flex-col items-center justify-center cursor-pointer"
                                 initial={false}
+                                style={{
+                                    backfaceVisibility: "hidden",
+                                    WebkitBackfaceVisibility: "hidden", // Safari-specific fix
+                                }}
                                 animate={{
                                     x: styles.x,
                                     scale: styles.scale,
                                     opacity: styles.opacity,
                                     zIndex: styles.zIndex,
-                                    rotateY: styles.rotateY
                                 }}
-                                transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                                transition={{ type: "spring", stiffness: 250, damping: 32 }} // Tuned to prevent overshoot
                                 onClick={() => {
                                     setDirection(index > activeIndex ? 1 : -1);
                                     setActiveIndex(index);
