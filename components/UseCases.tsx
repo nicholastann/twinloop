@@ -53,7 +53,7 @@ const caseStudies = [
         testimonial: `This is incredible! I'm truly feeling the power of AI.`,
         person: {
             name: "Sonam Aron",
-            title: "Sales and Marketing Leader",
+            title: "Founder & CEO",
             avatar: "/avatars/nysom.jpg"
         }
     }
