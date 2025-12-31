@@ -328,7 +328,7 @@ const Hero: React.FC = () => {
             style={{ opacity: step >= 3 ? 1 : 0 }}
           >
             <p className="text-[#334155]/80 text-xs font-bold uppercase tracking-widest mb-4">
-              Trusted by top brand teams
+              Trusted by Leading Brands & Agencies
             </p>
 
             <div className="relative w-full overflow-hidden [mask-image:linear-gradient(to_right,black_70%,transparent)]">
