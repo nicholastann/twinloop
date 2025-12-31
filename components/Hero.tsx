@@ -274,7 +274,8 @@ const Hero: React.FC = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="mt-0 text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-black leading-[0.9] tracking-tighter text-black mb-0 whitespace-nowrap"
+              className="mt-0 text-3xl md:text-5xl lg:text-5xl xl:text-7xl font-black leading-[0.9] tracking-tighter text-black mb-0 whitespace-normal xl:whitespace-nowrap"
+
             >
               Brand Spend Is High Stakes.
 
@@ -282,7 +283,8 @@ const Hero: React.FC = () => {
                 <motion.span initial={{ opacity: 0, height: 0 }}
                   animate={{ opacity: 1, height: "auto" }}
                   transition={{ duration: 0.5 }}
-                  className="block text-[#236a7c] text-3xl md:text-6xl lg:text-7xl xl:text-8xl whitespace-nowrap"
+                  className="block text-[#236a7c] text-3xl md:text-6xl lg:text-6xl xl:text-8xl whitespace-normal xl:whitespace-nowrap"
+
                 >
                   Derisk It In Minutes.
                 </motion.span>
@@ -297,7 +299,8 @@ const Hero: React.FC = () => {
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5 }}
-                    className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-medium text-[#334155] whitespace-normal md:whitespace-nowrap leading-snug tracking-tight max-w-[90%] md:max-w-none"
+                    className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-medium text-[#334155] whitespace-normal xl:whitespace-nowrap leading-snug tracking-tight max-w-[90%] md:max-w-none"
+
                   >
                     Test any brand decision against <br className="block md:hidden" />your customers before launch
                   </motion.p>
