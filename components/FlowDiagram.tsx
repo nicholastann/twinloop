@@ -11,7 +11,7 @@ const steps = [
     title: "Collect Rich First-Party Data",
     description: "We run voice AI–moderated interviews with hundreds of your customers to capture deep, open-ended insights at scale so you no longer have to compromise between speed, depth, and rigor.",
     icon: <FaMicrophone />,
-    theme: "from-[#236a7c] to-[#1e5b6d]", // Teal Gradient
+    theme: "from-[#236a7c] to-[#1e5b6d]",
     image: "/step1.png"
   },
   {
@@ -20,7 +20,7 @@ const steps = [
     title: "Generate Robust Digital Twins",
     description: "Our engine builds 1:1 personalized digital twins of your customers that mirror their preferences, opinions, and behaviors so you can test decisions with confidence.",
     icon: <FaUserFriends />,
-    theme: "from-[#0f172a] to-[#334155]", // Slate Gradient
+    theme: "from-[#0f172a] to-[#334155]",
     image: "/step2.png"
   },
   {
@@ -29,7 +29,7 @@ const steps = [
     title: "Run Simulations On-Demand",
     description: "Use your twin panel to ideate, test, and refine creative, messaging, and strategic decisions in minutes before you launch.",
     icon: <FaRocket />,
-    theme: "from-[#236a7c] to-[#164656]", // Dark Teal Gradient
+    theme: "from-[#236a7c] to-[#164656]",
     image: "/step3.png"
   }
 ];
