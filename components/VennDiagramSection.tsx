@@ -29,8 +29,7 @@ const USE_CASES = [
         simulation: [
             "Message comprehension: 58%",
             "Biggest gap: differentiation blends into category language.",
-            "",
-            "Fix: one crisp “unlike X…” line + one proof point near the headline.",
+            "One crisp “unlike X…” line + one proof point near the headline.",
         ]
     },
     {
@@ -53,8 +52,7 @@ const USE_CASES = [
         simulation: [
             "Thumbstop: 7.8/10",
             "Drop-off: benefit arrives after peak attention.",
-            "",
-            "Fix: put benefit inside the hook + earlier brand cue.",
+            "Put benefit inside the hook + earlier brand cue.",
         ]
     },
     {
@@ -77,8 +75,7 @@ const USE_CASES = [
         simulation: [
             "Resonance split: 8.1 vs 5.9",
             "Two segments are reacting very differently.",
-            "",
-            "Fix: two cutdowns with distinct hooks + pain framing.",
+            "Two cutdowns with distinct hooks + pain framing.",
         ]
     },
     {
@@ -101,8 +98,7 @@ const USE_CASES = [
         simulation: [
             "Offer acceptance: 29%",
             "Biggest blocker: perceived risk > perceived value.",
-            "",
-            "Fix: starter option + one-line guarantee + clearer deliverable framing.",
+            "Starter option + one-line guarantee + clearer deliverable framing.",
         ]
     },
     {
@@ -125,8 +121,7 @@ const USE_CASES = [
         simulation: [
             "2-second clarity: 52%",
             "Main issue: competing claims dilute the hero benefit.",
-            "",
-            "Fix: one hero benefit + one proof marker, reduce the rest.",
+            "One hero benefit + one proof marker, reduce the rest.",
         ]
     },
     {
@@ -149,8 +144,7 @@ const USE_CASES = [
         simulation: [
             "Time-to-understand: 13s",
             "Missing: quick “how it works” + concrete example output.",
-            "",
-            "Fix: 3-step flow under hero + move proof above first CTA.",
+            "3-step flow under hero + move proof above first CTA.",
         ]
     },
 ];
@@ -295,7 +289,7 @@ const VennDiagramSection: React.FC = () => {
 
                     {/* Mobile Layout (Vertical Stack) */}
                     <div className="md:hidden w-full flex flex-col items-center gap-6 py-2">
-                        <h4 className="text-base font-black text-[#64748b] uppercase tracking-wider">Decisions you’re making</h4>
+                        <h4 className="text-base font-black text-[#64748b] tracking-wider">Decisions you’re making</h4>
 
                         <div className="relative w-full h-[550px]">
                             <AnimatePresence mode="wait" custom={direction} initial={false}>
@@ -346,7 +340,7 @@ const VennDiagramSection: React.FC = () => {
                                     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 w-[280px] pointer-events-none text-center">
                                         <div className="bg-white p-4 rounded-xl border border-[#236a7c]/20 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.2)]">
                                             <div className="flex justify-center mb-2">
-                                                <span className="bg-[#236a7c] text-white px-2 py-0.5 rounded-full text-[9px] font-black uppercase tracking-widest">Result</span>
+                                                <span className="bg-[#236a7c] text-white px-2 py-0.5 rounded-full text-[9px] font-black tracking-widest">Result</span>
                                             </div>
 
                                             <div className="border-b border-gray-100 pb-2 mb-2">
@@ -357,13 +351,13 @@ const VennDiagramSection: React.FC = () => {
 
                                             <div className="grid grid-cols-2 gap-3 text-left">
                                                 <div className="flex flex-col">
-                                                    <p className="text-[9px] font-black text-[#64748b] uppercase mb-1">Problem</p>
+                                                    <p className="text-[9px] font-black text-[#64748b] mb-1">Problem</p>
                                                     <p className="text-[10px] text-[#334155] leading-tight">{activeCase.simulation[1]}</p>
                                                 </div>
 
                                                 <div className="flex flex-col bg-[#f0f9ff] p-2 rounded-lg border border-[#236a7c]/20">
-                                                    <p className="text-[9px] font-black text-[#236a7c] uppercase mb-1">Fix</p>
-                                                    <p className="text-[10px] font-bold text-[#164656] leading-tight">{activeCase.simulation[3].replace("Fix:", "").trim()}</p>
+                                                    <p className="text-[9px] font-black text-[#236a7c] mb-1">Fix</p>
+                                                    <p className="text-[10px] font-bold text-[#164656] leading-tight">{activeCase.simulation[2]}</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -373,7 +367,7 @@ const VennDiagramSection: React.FC = () => {
                         </div>
 
 
-                        <h4 className="text-base font-black text-[#236a7c] uppercase tracking-wider">How it lands with customers</h4>
+                        <h4 className="text-base font-black text-[#236a7c] tracking-wider">How it lands with customers</h4>
 
                         {/* Mobile Dots */}
                         <div className="flex md:hidden justify-center gap-2 mt-4 mb-8">
@@ -419,7 +413,7 @@ const VennDiagramSection: React.FC = () => {
                                     className="relative w-full h-full"
                                 >
                                     <div className="absolute top-[12%] left-[45%] -translate-x-1/2 text-center w-[180px]">
-                                        <h4 className="text-[#64748b] font-black uppercase tracking-widest text-base">Decisions<br />you’re making</h4>
+                                        <h4 className="text-[#64748b] font-black tracking-widest text-base">Decisions<br />you’re making</h4>
                                     </div>
 
                                     {/* Scattered Cards for Decisions - Arc "(" following left curve */}
@@ -462,7 +456,7 @@ const VennDiagramSection: React.FC = () => {
                                     className="relative w-full h-full"
                                 >
                                     <div className="absolute top-[12%] right-[45%] translate-x-1/2 text-center w-[180px]">
-                                        <h4 className="text-[#236a7c] font-black uppercase tracking-widest text-base">How it lands<br />with customers</h4>
+                                        <h4 className="text-[#236a7c] font-black tracking-widest text-base">How it lands<br />with customers</h4>
                                     </div>
 
                                     {/* Scattered Cards for Customers - Arc ")" following right curve */}
@@ -503,7 +497,7 @@ const VennDiagramSection: React.FC = () => {
                                     transition={{ duration: 0.3, delay: 0.1 }}
                                 >
                                     <div className="bg-white rounded-3xl p-6 shadow-[0_25px_60px_-15px_rgba(35,106,124,0.35)] border border-[#236a7c]/20 z-50 relative">
-                                        <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#236a7c] text-white px-4 py-1 rounded-full text-[10px] font-black uppercase tracking-widest shadow-lg">
+                                        <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#236a7c] text-white px-4 py-1 rounded-full text-[10px] font-black tracking-widest shadow-lg">
                                             Twinloop Result
                                         </div>
 
@@ -513,13 +507,15 @@ const VennDiagramSection: React.FC = () => {
                                                 <p className="text-3xl font-black text-[#164656] leading-none mb-1">
                                                     {activeCase.simulation[0].split(":")[1]?.split(",")[0] || activeCase.simulation[0]}
                                                 </p>
-                                                <p className="text-[10px] font-bold text-[#64748b] uppercase tracking-wider">Simulation score</p>
+                                                <p className="text-[10px] font-bold text-[#64748b] tracking-wider">
+                                                    {activeCase.simulation[0].split(":")[0]}
+                                                </p>
                                             </div>
 
                                             {/* Insight */}
                                             <div className="flex gap-4 items-start">
                                                 <div>
-                                                    <h5 className="text-xs font-black text-[#0f172a] uppercase tracking-wide mb-1">Friction point</h5>
+                                                    <h5 className="text-xs font-black text-[#0f172a] tracking-wide mb-1">Friction point</h5>
                                                     <p className="text-sm text-[#334155] leading-relaxed">
                                                         {activeCase.simulation[1]}
                                                     </p>
@@ -529,9 +525,9 @@ const VennDiagramSection: React.FC = () => {
                                             {/* Fix Action */}
                                             <div className="bg-[#f0f9ff] border border-[#236a7c]/20 p-3 rounded-xl flex gap-4 items-start">
                                                 <div>
-                                                    <h5 className="text-xs font-black text-[#236a7c] uppercase tracking-wide mb-1">Recommended fix</h5>
+                                                    <h5 className="text-xs font-black text-[#236a7c] tracking-wide mb-1">Recommended fix</h5>
                                                     <p className="text-sm font-bold text-[#164656] leading-relaxed">
-                                                        {activeCase.simulation[3].replace("Fix:", "").trim()}
+                                                        {activeCase.simulation[2]}
                                                     </p>
                                                 </div>
                                             </div>

@@ -20,10 +20,10 @@ const Footer: React.FC = () => {
                     {/* Right Side: Links & Copyright */}
                     <div className="flex flex-col items-center md:items-end gap-2">
                         <div className="flex items-center gap-6 md:gap-8">
-                            <a href="mailto:noreply@twinloop.ai" className="text-[#236a7c] hover:text-[#1e5b6d] transition-colors font-bold text-sm">
+                            <a href="mailto:naman@twinloop.ai" className="text-[#236a7c] hover:text-[#1e5b6d] transition-colors font-bold text-sm">
                                 Contact us
                             </a>
-                            <a href="#" className="inline-flex items-center justify-center p-2 rounded-full bg-[#236a7c]/10 text-[#236a7c] hover:bg-[#236a7c] hover:text-white transition-all duration-300">
+                            <a href="https://www.linkedin.com/company/twinloop-ai/" className="inline-flex items-center justify-center p-2 rounded-full bg-[#236a7c]/10 text-[#236a7c] hover:bg-[#236a7c] hover:text-white transition-all duration-300">
                                 <FaLinkedin size={18} />
                             </a>
                         </div>
