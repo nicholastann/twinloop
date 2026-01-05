@@ -31,7 +31,7 @@ const caseStudies = [
             { label: "Twins", value: "200+" },
         ],
         context: "Rootlabs needed a faster way to test creator-led content on TikTok for their hair supplement brand. Twinloop built 200+ personalized digital twins representing their core audience of hair growth supplement shoppers via TikTok Shop using AI-moderated voice interviews.",
-        findings: "Rootlabs now uses the digital twin panel to pressure-test video, image and text assets centered on creator scripts and hooks and surface fresh content ideass without re-running research for every iteration.",
+        findings: "Rootlabs now uses the digital twin panel to pressure-test video, image and text assets centered on creator scripts and hooks and surface fresh content ideas without re-running research for every iteration.",
         testimonial: "We were running out of ideas and guessing what would work next. Twinloop gave us a repeatable way to test TikTok creator scripts and generate new angles without starting from scratch every time.",
         person: {
             name: "Mayank Kumar",
@@ -50,10 +50,10 @@ const caseStudies = [
         ],
         context: "NYSOM was launching a sleep & wellness brand from India to a global audience. Twinloop combined AI-moderated voice interviews with quantitative data to build a panel of 120 digital twins.",
         findings: "NYSOM now uses the twin panel as an always-on thought partner to pressure-test brand decisions in real time — name, value proposition, messaging, website, and more — before committing spend.",
-        testimonial: `This is incredible! I'm truly feeling the power of AI.`,
+        testimonial: `Twinloop played the role of a true strategic partner for NYSOM's brand Ruheva – launching specialized sleep essentials that help consumers get deeper rest. Twinloop helped us test hypotheses, pressure-check ideas, and access consumer insights that are usually out of reach for startups building for the US market from India. It felt less like a tool and more like an always-on advisory layer that brought speed, depth, and clarity to our decision-making. Coming from 17 years as a brand and revenue leader across Meta and Procter & Gamble, I can confidently say this kind of agility in consumer research is invaluable – especially in a space where traditional research is slow, expensive, and often outdated by the time it lands.`,
         person: {
             name: "Sonam Aron",
-            title: "Sales and Marketing Leader",
+            title: "Founder & CEO",
             avatar: "/avatars/nysom.jpg"
         }
     }

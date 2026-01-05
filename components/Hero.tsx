@@ -274,7 +274,9 @@ const Hero: React.FC = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="mt-0 text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-black leading-[0.9] tracking-tighter text-black mb-0 whitespace-nowrap"
+              className="mt-0 text-3xl md:text-5xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-black leading-[0.9] tracking-tighter text-black mb-0 whitespace-normal 2xl:whitespace-nowrap"
+
+
             >
               Brand spend is high stakes.
 
@@ -297,7 +299,9 @@ const Hero: React.FC = () => {
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5 }}
-                    className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-medium text-[#334155] whitespace-normal md:whitespace-nowrap leading-snug tracking-tight max-w-[90%] md:max-w-none"
+                    className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-medium text-[#334155] whitespace-normal 2xl:whitespace-nowrap leading-snug tracking-tight max-w-[90%] md:max-w-none"
+
+
                   >
                     Test any brand decision against <br className="block md:hidden" />your customers before launch.
                   </motion.p>
@@ -328,7 +332,7 @@ const Hero: React.FC = () => {
             style={{ opacity: step >= 3 ? 1 : 0 }}
           >
             <p className="text-[#334155]/80 text-xs font-bold uppercase tracking-widest mb-4">
-              Trusted by top brand teams
+              Trusted by Leading Brands & Agencies
             </p>
 
             <div className="relative w-full overflow-hidden [mask-image:linear-gradient(to_right,black_70%,transparent)]">
