@@ -6,14 +6,14 @@ import { motion } from "framer-motion";
 
 const validations = [
     {
-        title: "Stanford & Google DeepMind Research",
+        title: "Stanford & Google DeepMind research",
         description: "Simulating 1,052 people, agents replicated human behavior with 85% accuracy.",
         logo: "/stanford.png",
         logo2: "/deepMind.png",
         href: "https://drive.google.com/file/d/1BHEm78faqPACOzCTwLplLFDYxbUCcbBj/view?usp=sharing",
     },
     {
-        title: "Columbia University Studies",
+        title: "Columbia University studies",
         description: "Modeling 2,058 participants, digital twins predicted real-world decisions with 88% accuracy.",
         logo: "/columbia.png",
         href: "https://drive.google.com/file/d/1oQIfnKgTQPdosyuky1pB_xPJ0869Ip4x/view?usp=share_link",
@@ -27,7 +27,7 @@ const ValidationSection: React.FC = () => {
                 <div className="text-center mb-12">
                     <ScrollFadeUp yOffset={20} duration={0.8} delay={0.1}>
                         <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-[#0f172a] tracking-tight leading-tight mb-6">
-                            Our digital Twin Methodology is Informed by<br /><span className="text-[#236a7c]">Published Academic Research.</span>
+                            Our digital twin methodology is informed by<br /><span className="text-[#236a7c]">published academic research.</span>
                         </h2>
                     </ScrollFadeUp>
                 </div>

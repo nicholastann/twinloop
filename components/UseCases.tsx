@@ -9,7 +9,7 @@ const caseStudies = [
     {
         id: "gbk",
         company: "GBK Collective",
-        title: "Force Multiplier for Modern Research Firms",
+        title: "Force multiplier for modern research firms",
         logo: "/companyLogos/gbk.png",
         stats: [],
         context: "GBK Collective is an empirically driven strategic insights firm working on thoughtfully leveraging AI – to amplify client outcomes and improve internal productivity. They piloted Twinloop across multiple workflows – including AI-moderated voice interviews, digital twins, and qualitative analysis – to increase speed and depth without sacrificing rigor.",
@@ -24,7 +24,7 @@ const caseStudies = [
     {
         id: "rootlabs",
         company: "Rootlabs",
-        title: "Scaling Content",
+        title: "Scaling content",
         logo: "/companyLogos/rootLabs.png",
         stats: [
             { label: "Speed", value: "<1 Week" },
@@ -42,7 +42,7 @@ const caseStudies = [
     {
         id: "nysom",
         company: "NYSOM",
-        title: "Building a Global Sleep Brand",
+        title: "Building a global sleep brand",
         logo: "/companyLogos/nysom.png",
         stats: [
             { label: "Customer Twins", value: "120" },
@@ -103,7 +103,7 @@ const UseCases: React.FC = () => {
                 <div className="text-center mb-10">
                     <ScrollFadeUp yOffset={20} duration={0.8} delay={0.1}>
                         <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-[#0f172a] tracking-tight leading-tight mb-4">
-                            From Insights to <span className="text-[#236a7c]">Impact</span>
+                            From insights to <span className="text-[#236a7c]">impact</span>
                         </h2>
                     </ScrollFadeUp>
                 </div>

@@ -7,8 +7,8 @@ import { FaMicrophone, FaUserFriends, FaRocket, FaChevronLeft, FaChevronRight } 
 const steps = [
   {
     id: "01",
-    label: "Data Collection",
-    title: "Collect Rich First-Party Data",
+    label: "Data collection",
+    title: "Collect rich first-party data",
     description: "We run voice AI–moderated interviews with hundreds of your customers to capture deep, open-ended insights at scale so you no longer have to compromise between speed, depth, and rigor.",
     icon: <FaMicrophone />,
     theme: "from-[#236a7c] to-[#1e5b6d]",
@@ -16,8 +16,8 @@ const steps = [
   },
   {
     id: "02",
-    label: "Twin Generation",
-    title: "Generate Robust Digital Twins",
+    label: "Twin generation",
+    title: "Generate robust digital twins",
     description: "Our engine builds 1:1 personalized digital twins of your customers that mirror their preferences, opinions, and behaviors so you can test decisions with confidence.",
     icon: <FaUserFriends />,
     theme: "from-[#0f172a] to-[#334155]",
@@ -26,7 +26,7 @@ const steps = [
   {
     id: "03",
     label: "Simulation",
-    title: "Run Simulations On-Demand",
+    title: "Run simulations on-demand",
     description: "Use your twin panel to ideate, test, and refine creative, messaging, and strategic decisions in minutes before you launch.",
     icon: <FaRocket />,
     theme: "from-[#236a7c] to-[#164656]",

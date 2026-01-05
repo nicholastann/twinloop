@@ -65,7 +65,7 @@ const ContactForm: React.FC = () => {
                 <div className="text-center mb-10">
                     <ScrollFadeUp yOffset={20} duration={0.8} delay={0.1}>
                         <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-[#0f172a] tracking-tight leading-tight mb-4">
-                            See Twinloop <span className="text-[#236a7c]">In Action</span>
+                            See Twinloop <span className="text-[#236a7c]">in action</span>
                         </h2>
                     </ScrollFadeUp>
 
@@ -103,7 +103,7 @@ const ContactForm: React.FC = () => {
                                         >
                                             <FaCheckCircle size={40} />
                                         </motion.div>
-                                        <h3 className="text-3xl font-black text-[#0f172a] mb-2">Message Sent!</h3>
+                                        <h3 className="text-3xl font-black text-[#0f172a] mb-2">Message sent!</h3>
                                         <p className="text-[#334155] text-lg">We'll be in touch shortly.</p>
                                         <button
                                             onClick={() => setSubmitted(false)} // Optional: allow reset
@@ -162,7 +162,7 @@ const ContactForm: React.FC = () => {
                                             type="submit"
                                             className="cursor-pointer w-full bg-gradient-to-r from-[#236a7c] to-[#1e5b6d] hover:from-[#1e5b6d] hover:to-[#164656] text-white text-xl font-bold rounded-xl py-4 shadow-lg active:scale-[0.97]"
                                         >
-                                            Book Demo
+                                            Book demo
                                         </motion.button>
 
                                         <p className="text-muted-foreground text-sm mt-6 text-center font-medium opacity-80">

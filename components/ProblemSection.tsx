@@ -27,7 +27,7 @@ const ProblemSection: React.FC = () => {
 
         {/* --- Header Section --- */}
         <ScrollFadeUp yOffset={30} duration={1} delay={0.1} className="text-2xl md:text-4xl lg:text-5xl font-black text-[#0f172a] tracking-tight leading-[0.9] mb-12 md:mb-20 pt-10 max-w-5xl mx-auto">
-          Despite more tools and data, <span className="text-[#236a7c]">Customer Connection</span> is the missing link
+          Despite more tools and data, <span className="text-[#236a7c]">customer connection</span> is the missing link
         </ScrollFadeUp>
 
         <ScrollFadeUp yOffset={30} duration={0.8} delay={0.2}>

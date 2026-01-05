@@ -11,193 +11,146 @@ import ScrollFadeUp from "./ui/ScrollFadeUp";
 const USE_CASES = [
     {
         id: 1,
-        title: "Messaging & Claims",
+        title: "Positioning & messaging",
         icon: <FaCommentDots />,
         decisions: [
-            "Headline or hook",
-            "Benefit claim",
+            "Core promise",
+            "Differentiator",
             "Proof points",
+            "Category framing",
             "Tone",
-            "Call to action",
         ],
         customer: [
-            "“I’d rate clarity an 8 out of 10 because I understand the benefit in one read.”",
-            "“I’m skeptical because the claim feels strong, but you are not showing me what makes it true.”",
-            "“This sounds like category language, so I’m not sure what makes you different.”",
+            "“This is actually compelling — I get the outcome right away.”",
+            "“I can see why a brand team would want this.”",
+            "“I can’t repeat it back in one sentence yet.”",
+            "“I like it, but it still sounds a little like other tools in the space.”",
         ],
         simulation: [
-            "Clarity scored 8.4/10, but credibility lagged at 6.1/10.",
-            "Biggest drop: customers ask for proof and don't see reason to believe.",
-            "Differentiation is weak; language feels interchangeable.",
-            "Fix: add one concrete proof point & tighten claim.",
+            "Message comprehension: 58%",
+            "Biggest gap: differentiation blends into category language.",
+            "",
+            "Fix: one crisp “unlike X…” line + one proof point near the headline.",
         ]
     },
     {
         id: 2,
-        title: "Positioning & Value Prop",
-        icon: <FaMapMarkerAlt />,
+        title: "Ad creative & scripts",
+        icon: <FaLightbulb />,
         decisions: [
-            "Positioning statement",
-            "Reasons to believe",
-            "Competitive frame",
-            "Category language",
-            "Brand tone",
+            "Hook (first 2 seconds)",
+            "Visual pacing",
+            "Script beats",
+            "Brand cue timing",
+            "CTA",
         ],
         customer: [
-            "“I like the idea, but I can’t tell what your unfair advantage is.”",
-            "“This feels like it’s speaking to me, but it still feels a bit broad.”",
-            "“I’m not the target customer, and this doesn’t give me a reason to care.”",
-            "“If I had to summarize you to a friend, I’d probably get it wrong.”",
+            "“I’d stop scrolling — it’s genuinely interesting.”",
+            "“The first moment is strong. I wanted to see where it goes.”",
+            "“I remember the vibe, not the brand.”",
+            "“You lost me halfway — it got complicated fast.”",
         ],
         simulation: [
-            "Relevance: 8.0/10, Differentiation: 5.2/10.",
-            "Customers understand promise but struggle to explain 'why you'.",
-            "Positioning feels broad; high appeal but low distinctiveness.",
-            "Fix: choose one sharp pillar + specific reasons to believe.",
+            "Thumbstop: 7.8/10",
+            "Drop-off: benefit arrives after peak attention.",
+            "",
+            "Fix: put benefit inside the hook + earlier brand cue.",
         ]
     },
     {
         id: 3,
-        title: "Creative Concepts",
-        icon: <FaLightbulb />,
+        title: "Audience fit",
+        icon: <FaUsers />,
         decisions: [
-            "Concept direction",
-            "Visual style",
-            "Story arc",
-            "Brand cues",
-            "Channel format",
+            "Which segment to target first",
+            "Message angle per segment",
+            "Primary objection",
+            "Context cues (who it’s for)",
+            "Channel fit",
         ],
         customer: [
-            "“This made me stop, I’d give it a 9 out of 10 for thumbstop.”",
-            "“It looks cool, but I’m confused about what you want me to do next.”",
-            "“This feels like an ad trying too hard, so I’d scroll past out of spite.”",
-            "“I’d share it if the point landed faster and felt more authentic.”",
+            "“If I did this kind of work, I’d use it.”",
+            "“This feels made for a brand manager.”",
+            "“This is for my friend, not for me.”",
+            "“It’s trying to talk to everyone at once.”",
         ],
         simulation: [
-            "Thumbstop: 7.9/10, Message Takeout: 6.0/10.",
-            "Attracts attention early, but message isn't understood quickly.",
-            "Brand fit mixed; some read tone/cues as off-brand.",
-            "Fix: move benefit earlier & add clearer brand signals.",
+            "Resonance split: 8.1 vs 5.9",
+            "Two segments are reacting very differently.",
+            "",
+            "Fix: two cutdowns with distinct hooks + pain framing.",
         ]
     },
     {
         id: 4,
-        title: "Audience & Segments",
-        icon: <FaUsers />,
+        title: "Pricing & offer",
+        icon: <FaTags />,
         decisions: [
-            "Priority audience",
-            "Segment messaging",
-            "Benefit emphasis",
-            "Channel mix",
-            "Offer strategy",
+            "Price point / tiering",
+            "Bundle structure",
+            "Trial vs commitment",
+            "Discount framing",
+            "Risk reversal (guarantee)",
         ],
         customer: [
-            "“As a new customer, I feel like I’m missing context...”",
-            "“As someone already in the category, this feels made for me...”",
-            "“It’s clear enough, but not motivating enough to switch.”",
-            "“Feels like it’s built for a niche audience.”",
+            "“If this saves me time, the price makes sense.”",
+            "“I like that it’s outcome-based — feels practical.”",
+            "“I’m not paying that without knowing it’ll work for me.”",
+            "“If there was a starter option, I’d try it.”",
         ],
         simulation: [
-            "Sharp divergence: Segment A (8.1/10) vs Segment B (5.9/10).",
-            "Non-core customers feel message isn't for them.",
-            "Motivation is the bottleneck, not clarity.",
-            "Fix: segment-specific lead messaging + tailored payoff.",
+            "Offer acceptance: 29%",
+            "Biggest blocker: perceived risk > perceived value.",
+            "",
+            "Fix: starter option + one-line guarantee + clearer deliverable framing.",
         ]
     },
     {
         id: 5,
-        title: "Packaging",
+        title: "Packaging & claims",
         icon: <FaBoxOpen />,
         decisions: [
-            "Benefit hierarchy",
-            "Claims order",
-            "Visual system",
-            "PDP bullets",
-            "Module order",
+            "Pack hierarchy",
+            "Claim wording",
+            "Proof markers",
+            "SKU naming",
+            "Visual identity cues",
         ],
         customer: [
-            "“I’m scanning for the one main benefit, and I’m not finding it fast.”",
-            "“I’m seeing a lot of claims, and that actually makes me trust it less.”",
-            "“If you added one simple proof cue, I’d feel way more confident.”",
-            "“Looks premium, but harder to understand than needed.”",
+            "“This looks premium — I’d pick it up.”",
+            "“The design feels clean and trustworthy.”",
+            "“I’m not sure what it does from the front.”",
+            "“Too many badges — I don’t know what to trust.”",
         ],
         simulation: [
-            "Shopper clarity: 6.1/10, Trust: 5.8/10.",
-            "Hero benefit lost; claim stack creates skepticism.",
-            "High cognitive load reduces purchase confidence.",
-            "Fix: cleaner hierarchy (1 hero benefit, 1 proof cue).",
+            "2-second clarity: 52%",
+            "Main issue: competing claims dilute the hero benefit.",
+            "",
+            "Fix: one hero benefit + one proof marker, reduce the rest.",
         ]
     },
     {
         id: 6,
-        title: "Pricing & Promo Framing",
-        icon: <FaTags />,
-        decisions: [
-            "Price and tiers",
-            "Discount framing",
-            "Bundle structure",
-            "Subscription language",
-            "Guarantee and returns",
-        ],
-        customer: [
-            "“Deal appeal is an 8 out of 10 because the offer grabs me right away.”",
-            "“The promo language makes me wonder what the catch is.”",
-            "“I’d probably wait, because this feels like it will be discounted again.”",
-            "“If you explained value in terms of outcomes, I’d pay full price.”",
-        ],
-        simulation: [
-            "Deal appeal: 8.1/10, Offer trust: 5.6/10.",
-            "Savings liked, but aggressive language sparks doubt.",
-            "Value not anchored to outcomes; increases hesitation.",
-            "Fix: simplify offer & lead with outcome-based value.",
-        ]
-    },
-    {
-        id: 7,
-        title: "Brand Naming & Taglines",
-        icon: <FaSignature />,
-        decisions: [
-            "Name options",
-            "Tagline options",
-            "Readability",
-            "Associations",
-            "Category fit",
-        ],
-        customer: [
-            "“I’d remember the name, but I still wouldn’t know what you sell.”",
-            "“It sounds premium, but it also feels a bit abstract.”",
-            "“I’m not the target customer, and this doesn’t give me a reason to care.”",
-            "“The tagline is doing too little work, I need it to make meaning obvious.”",
-        ],
-        simulation: [
-            "Memorability: 7.0/10, Meaning Clarity: 5.9/10.",
-            "Name is sticky but category/offer isn't clear.",
-            "Pronunciation uncertainty reduces word-of-mouth.",
-            "Fix: tagline must make meaning obvious instantly.",
-        ]
-    },
-    {
-        id: 8,
-        title: "Campaign Readiness",
+        title: "Landing page & conversion",
         icon: <FaClipboardCheck />,
         decisions: [
-            "Final creative and copy",
-            "Landing page alignment",
-            "Claims support",
-            "Targeting and placements",
-            "Brand safety",
+            "Hero headline/subhead",
+            "How it works placement",
+            "Proof placement",
+            "CTA copy/placement",
+            "Objection handling",
         ],
         customer: [
-            "“I’d click, but I’m clicking to verify you are not exaggerating.”",
-            "“The promise feels bigger than what the landing page seems ready to back up.”",
-            "“Parts of this feel like they could be interpreted the wrong way...”",
-            "“If you tightened the claim and showed proof, I’d feel comfortable.”",
+            "“This is exactly the kind of shortcut I wish we had.”",
+            "“Once I understood it, I wanted to click.”",
+            "“I’m interested, but what happens after I click?”",
+            "“Show me one example output and I’m sold.”",
         ],
         simulation: [
-            "Click intent: 6.8/10, Trust: 5.7/10.",
-            "Gap noticed between ad promise and LP support.",
-            "Misinterpretation risks in specific contexts.",
-            "Fix: tighten claim, add substantiation, align ad & LP.",
+            "Time-to-understand: 13s",
+            "Missing: quick “how it works” + concrete example output.",
+            "",
+            "Fix: 3-step flow under hero + move proof above first CTA.",
         ]
     },
 ];
@@ -275,7 +228,7 @@ const VennDiagramSection: React.FC = () => {
 
                 {/* --- Section Header --- */}
                 <ScrollFadeUp yOffset={20} duration={0.8} delay={0.2} className="text-3xl md:text-4xl lg:text-5xl font-black text-[#0f172a] tracking-tight leading-tight mb-8 pt-8 max-w-4xl mx-auto">
-                    Put your <span className="text-[#236a7c]">Customer in the Room</span> <br className="hidden md:block" /> For Every Brand Decision
+                    Put your <span className="text-[#236a7c]">customer in the room</span> <br className="hidden md:block" /> for every brand decision
                 </ScrollFadeUp>
 
                 {/* --- Carousel Selector (Wheel Animation) --- */}
@@ -560,13 +513,13 @@ const VennDiagramSection: React.FC = () => {
                                                 <p className="text-3xl font-black text-[#164656] leading-none mb-1">
                                                     {activeCase.simulation[0].split(":")[1]?.split(",")[0] || activeCase.simulation[0]}
                                                 </p>
-                                                <p className="text-[10px] font-bold text-[#64748b] uppercase tracking-wider">Simulation Score</p>
+                                                <p className="text-[10px] font-bold text-[#64748b] uppercase tracking-wider">Simulation score</p>
                                             </div>
 
                                             {/* Insight */}
                                             <div className="flex gap-4 items-start">
                                                 <div>
-                                                    <h5 className="text-xs font-black text-[#0f172a] uppercase tracking-wide mb-1">Friction Point</h5>
+                                                    <h5 className="text-xs font-black text-[#0f172a] uppercase tracking-wide mb-1">Friction point</h5>
                                                     <p className="text-sm text-[#334155] leading-relaxed">
                                                         {activeCase.simulation[1]}
                                                     </p>
@@ -576,7 +529,7 @@ const VennDiagramSection: React.FC = () => {
                                             {/* Fix Action */}
                                             <div className="bg-[#f0f9ff] border border-[#236a7c]/20 p-3 rounded-xl flex gap-4 items-start">
                                                 <div>
-                                                    <h5 className="text-xs font-black text-[#236a7c] uppercase tracking-wide mb-1">Recommended Fix</h5>
+                                                    <h5 className="text-xs font-black text-[#236a7c] uppercase tracking-wide mb-1">Recommended fix</h5>
                                                     <p className="text-sm font-bold text-[#164656] leading-relaxed">
                                                         {activeCase.simulation[3].replace("Fix:", "").trim()}
                                                     </p>

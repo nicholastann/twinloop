@@ -11,7 +11,7 @@ const HowItWorks: React.FC = () => {
       <div className="text-center mb-8">
         <ScrollFadeUp yOffset={20} duration={0.8} delay={0.1}>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-[#0f172a] tracking-tight leading-tight mb-4">
-            Rapid Feedback Loop Using <span className="text-[#236a7c]">Customer Digital Twins</span>
+            Rapid feedback loop using <span className="text-[#236a7c]">customer digital twins</span>
           </h2>
         </ScrollFadeUp>
       </div>

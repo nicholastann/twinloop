@@ -140,7 +140,7 @@ const Hero: React.FC = () => {
           }
           return prev + 1;
         });
-      }, 400); // Speed per card
+      }, 500); // Speed per card
       return () => clearInterval(interval);
     }
   }, [step, articles.length, pileIndex]);
@@ -262,7 +262,7 @@ const Hero: React.FC = () => {
 
   return (
     <section className="relative w-full h-screen flex items-start bg-transparent text-[#0f1a1f] pt-20 md:pt-20 lg:pt-24 overflow-hidden">
-      <div className="w-full max-w-[99%] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-y-0 lg:gap-0 items-center h-full">
+      <div className="w-full px-6 md:px-12 lg:px-24 mx-auto grid grid-cols-1 lg:grid-cols-2 gap-y-0 lg:gap-0 items-center h-full">
 
         {/* Left Column: Text & CTA */}
         <div className="flex flex-col h-auto lg:h-full z-20 relative px-4 md:px-0 pb-0 md:pb-8 justify-center">
@@ -274,7 +274,7 @@ const Hero: React.FC = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="mt-0 text-3xl md:text-5xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-black leading-[0.9] tracking-tighter text-black mb-0 whitespace-normal 2xl:whitespace-nowrap"
+              className="mt-0 text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-black leading-[0.9] tracking-tighter text-black mb-0 whitespace-normal 2xl:whitespace-nowrap"
 
 
             >
@@ -284,7 +284,7 @@ const Hero: React.FC = () => {
                 <motion.span initial={{ opacity: 0, height: 0 }}
                   animate={{ opacity: 1, height: "auto" }}
                   transition={{ duration: 0.5 }}
-                  className="block text-[#236a7c] text-3xl md:text-5xl lg:text-7xl xl:text-8xl whitespace-nowrap"
+                  className="block text-[#236a7c] text-3xl md:text-4xl lg:text-5xl xl:text-6xl whitespace-nowrap"
                 >
                   Derisk it in minutes.
                 </motion.span>
@@ -299,7 +299,7 @@ const Hero: React.FC = () => {
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5 }}
-                    className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-medium text-[#334155] whitespace-normal 2xl:whitespace-nowrap leading-snug tracking-tight max-w-[90%] md:max-w-none"
+                    className="text-lg sm:text-xl md:text-2xl lg:text-2xl font-medium text-[#334155] whitespace-normal 2xl:whitespace-nowrap leading-snug tracking-tight max-w-[90%] md:max-w-none"
 
 
                   >
@@ -319,7 +319,7 @@ const Hero: React.FC = () => {
                     className="inline-flex items-center justify-center px-8 py-4 text-lg font-bold rounded-xl text-white bg-gradient-to-r from-[#236a7c] to-[#1e5b6d] hover:from-[#1e5b6d] hover:to-[#164656] transition-all duration-300 transform hover:scale-[1.02] shadow-lg hover:shadow-xl"
                   >
                     <span className="md:hidden">Book Demo</span>
-                    <span className="hidden md:inline">Book a Demo to See How</span>
+                    <span className="hidden md:inline">Book a demo to see how</span>
                   </a>
                 </div>
               </div>
@@ -332,7 +332,7 @@ const Hero: React.FC = () => {
             style={{ opacity: step >= 3 ? 1 : 0 }}
           >
             <p className="text-[#334155]/80 text-xs font-bold uppercase tracking-widest mb-4">
-              Trusted by Leading Brands & Agencies
+              Trusted by leading brands & agencies
             </p>
 
             <div className="relative w-full overflow-hidden [mask-image:linear-gradient(to_right,black_70%,transparent)]">
