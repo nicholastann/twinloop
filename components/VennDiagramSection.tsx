@@ -347,6 +347,9 @@ const VennDiagramSection: React.FC = () => {
                                                 <p className="text-2xl font-black text-[#164656] leading-none mb-0.5">
                                                     {activeCase.simulation[0].split(":")[1]?.split(",")[0] || activeCase.simulation[0]}
                                                 </p>
+                                                <p className="text-[9px] font-bold text-[#64748b] tracking-wider">
+                                                    {activeCase.simulation[0].split(":")[0]}
+                                                </p>
                                             </div>
 
                                             <div className="grid grid-cols-2 gap-3 text-left">
