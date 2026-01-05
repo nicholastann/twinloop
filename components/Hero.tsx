@@ -110,7 +110,7 @@ const Hero: React.FC = () => {
 
     if (step === 0) {
       // Auto-start pile after title
-      timer = setTimeout(() => setStep(1), 500);
+      timer = setTimeout(() => setStep(1), 750);
     }
     else if (step === 1) {
       // Pile logic handled separately via pileIndex
@@ -140,7 +140,7 @@ const Hero: React.FC = () => {
           }
           return prev + 1;
         });
-      }, 500); // Speed per card
+      }, 400); // Speed per card
       return () => clearInterval(interval);
     }
   }, [step, articles.length, pileIndex]);
