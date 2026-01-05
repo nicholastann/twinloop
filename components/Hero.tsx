@@ -110,7 +110,7 @@ const Hero: React.FC = () => {
 
     if (step === 0) {
       // Auto-start pile after title
-      timer = setTimeout(() => setStep(1), 750);
+      timer = setTimeout(() => setStep(1), 650);
     }
     else if (step === 1) {
       // Pile logic handled separately via pileIndex
