@@ -13,21 +13,8 @@ export const metadata: Metadata = {
     "Make every brand dollar count with customer digital twins. Test all brand decisions against customers in minutes with rapid feedback loops.",
   generator: "v0.app",
   icons: {
-    icon: [
-      {
-        url: "/twinloopmini.png",
-        media: "(prefers-color-scheme: light)",
-      },
-      {
-        url: "/twinloopmini.png",
-        media: "(prefers-color-scheme: dark)",
-      },
-      {
-        url: "/twinloopmini.png",
-        type: "image/png",
-      },
-    ],
-    apple: "/twinloopmini.png",
+    icon: "/favicon.ico",
+    apple: "/favicon.ico",
   },
 }
 
