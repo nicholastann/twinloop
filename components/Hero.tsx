@@ -337,10 +337,10 @@ const Hero: React.FC = () => {
 
             <div className="relative w-full overflow-hidden [mask-image:linear-gradient(to_right,black_70%,transparent)]">
               <div className="animate-marquee whitespace-nowrap flex gap-12 items-center w-max">
-                {["/companyLogos/nysom.png", "/companyLogos/rootLabs.png", "/companyLogos/gbk.png"]
-                  .concat(["/companyLogos/nysom.png", "/companyLogos/rootLabs.png", "/companyLogos/gbk.png"])
-                  .concat(["/companyLogos/nysom.png", "/companyLogos/rootLabs.png", "/companyLogos/gbk.png"])
-                  .concat(["/companyLogos/nysom.png", "/companyLogos/rootLabs.png", "/companyLogos/gbk.png"])
+                {["/companyLogos/nysom.png", "/companyLogos/rootLabs.png", "/companyLogos/gbk.png", "/companyLogos/celestialLights.png"]
+                  .concat(["/companyLogos/nysom.png", "/companyLogos/rootLabs.png", "/companyLogos/gbk.png", "/companyLogos/celestialLights.png"])
+                  .concat(["/companyLogos/nysom.png", "/companyLogos/rootLabs.png", "/companyLogos/gbk.png", "/companyLogos/celestialLights.png"])
+                  .concat(["/companyLogos/nysom.png", "/companyLogos/rootLabs.png", "/companyLogos/gbk.png", "/companyLogos/celestialLights.png"])
                   .map((src, index) => {
                     const isLarge = src.includes("gbk");
                     return (
@@ -416,10 +416,10 @@ const Hero: React.FC = () => {
 
           <div className="relative w-full overflow-hidden [mask-image:linear-gradient(to_right,black_70%,transparent)]">
             <div className="animate-marquee whitespace-nowrap flex gap-12 items-center w-max">
-              {["/companyLogos/nysom.png", "/companyLogos/rootLabs.png", "/companyLogos/gbk.png"]
-                .concat(["/companyLogos/nysom.png", "/companyLogos/rootLabs.png", "/companyLogos/gbk.png"])
-                .concat(["/companyLogos/nysom.png", "/companyLogos/rootLabs.png", "/companyLogos/gbk.png"])
-                .concat(["/companyLogos/nysom.png", "/companyLogos/rootLabs.png", "/companyLogos/gbk.png"])
+              {["/companyLogos/nysom.png", "/companyLogos/rootLabs.png", "/companyLogos/gbk.png", "/companyLogos/celestialLights.png"]
+                .concat(["/companyLogos/nysom.png", "/companyLogos/rootLabs.png", "/companyLogos/gbk.png", "/companyLogos/celestialLights.png"])
+                .concat(["/companyLogos/nysom.png", "/companyLogos/rootLabs.png", "/companyLogos/gbk.png", "/companyLogos/celestialLights.png"])
+                .concat(["/companyLogos/nysom.png", "/companyLogos/rootLabs.png", "/companyLogos/gbk.png", "/companyLogos/celestialLights.png"])
                 .map((src, index) => {
                   const isLarge = src.includes("gbk");
                   return (
