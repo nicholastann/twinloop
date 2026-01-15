@@ -43,8 +43,8 @@ function generateDeterministicArticle(id: number, articleData: { title: string; 
   const isMobile = containerWidth < 768;
 
   // Scale logic
-  const mobileScale = 0.65;
-  const scale = isMobile ? (articleData.scale ? articleData.scale * 0.4 : mobileScale) : (articleData.scale || 2);
+  const mobileScale = 0.55;
+  const scale = isMobile ? (articleData.scale ? articleData.scale * 0.35 : mobileScale) : (articleData.scale || 2);
 
   const centerX = containerWidth / 2;
   const centerY = containerHeight / 2;
@@ -58,7 +58,7 @@ function generateDeterministicArticle(id: number, articleData: { title: string; 
   const yMult = isMobile ? 0.6 : 1.0;
 
   const x = centerX - (cardBaseW / 2) + (layout.x * xMult);
-  const y = centerY - (isMobile ? 80 : 100) + (layout.y * yMult); // Start slightly higher than center on desktop, center on mobile
+  const y = centerY + (isMobile ? -100 : -100) + (layout.y * yMult); // Slightly high on both mobile and desktop
 
   return {
     id,
@@ -261,22 +261,19 @@ const Hero: React.FC = () => {
 
 
   return (
-    <section className="relative w-full h-screen flex items-start bg-transparent text-[#0f1a1f] pt-20 md:pt-20 lg:pt-24 overflow-hidden">
+    <section className="relative w-full min-h-screen lg:h-screen flex items-start bg-transparent text-[#0f1a1f] pt-20 md:pt-20 lg:pt-24 overflow-hidden">
       <div className="w-full px-6 md:px-12 lg:px-24 mx-auto grid grid-cols-1 lg:grid-cols-2 gap-y-0 lg:gap-0 items-center h-full">
 
-        {/* Left Column: Text & CTA */}
-        <div className="flex flex-col h-auto lg:h-full z-20 relative px-4 md:px-0 pb-0 md:pb-8 justify-center">
+        {/* Left Column wrapper: flex on desktop, contents on mobile to interleave grid items */}
+        <div className="contents lg:flex lg:flex-col lg:h-full z-20 relative px-4 md:px-0 pb-0 md:pb-8 justify-center order-1">
 
-          {/* Top Content (Headline + CTA) */}
-          <div className="flex flex-col justify-center space-y-8">
-            {/* Main Headline */}
+          {/* Group 1: Headline & Subtitle (Order 1 on Mobile) */}
+          <div className="order-1 flex flex-col justify-center space-y-4 lg:space-y-8">
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="mt-0 text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-black leading-[0.9] tracking-tighter text-black mb-0 whitespace-normal 2xl:whitespace-nowrap"
-
-
+              className="mt-0 text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-black leading-[0.9] tracking-tighter text-black mb-0 whitespace-normal 2xl:whitespace-nowrap"
             >
               Brand spend is high stakes.
 
@@ -284,77 +281,74 @@ const Hero: React.FC = () => {
                 <motion.span initial={{ opacity: 0, height: 0 }}
                   animate={{ opacity: 1, height: "auto" }}
                   transition={{ duration: 0.5 }}
-                  className="block text-[#236a7c] text-3xl md:text-4xl lg:text-5xl xl:text-6xl whitespace-nowrap"
+                  className="block text-[#236a7c] text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl whitespace-nowrap"
                 >
                   Derisk it in minutes.
                 </motion.span>
               )}
             </motion.h1>
 
-            {/* Subtitle & CTA Wrapper */}
-            <div className="flex flex-col gap-2 md:gap-6 w-full mt-4 lg:mt-12">
-              <div className="h-16 md:h-20 relative flex items-start">
-                {step >= 3 && (
-                  <motion.p
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5 }}
-                    className="text-lg sm:text-xl md:text-2xl lg:text-2xl font-medium text-[#334155] whitespace-normal 2xl:whitespace-nowrap leading-snug tracking-tight max-w-[90%] md:max-w-none"
-
-
-                  >
-                    Test any brand decision against <br className="block md:hidden" />your customers before launch.
-                  </motion.p>
-                )}
-              </div>
-
-              {/* CTA Buttons */}
-              <div
-                className={`flex flex-col gap-6 transition-opacity duration-1000 ${step < 3 ? "pointer-events-none" : ""}`}
-                style={{ opacity: step >= 3 ? 1 : 0 }}
-              >
-                <div>
-                  <a
-                    href="#contact"
-                    className="inline-flex items-center justify-center px-8 py-4 text-lg font-bold rounded-xl text-white bg-gradient-to-r from-[#236a7c] to-[#1e5b6d] hover:from-[#1e5b6d] hover:to-[#164656] transition-all duration-300 transform hover:scale-[1.02] shadow-lg hover:shadow-xl"
-                  >
-                    <span className="md:hidden">Book Demo</span>
-                    <span className="hidden md:inline">Book a demo to see how</span>
-                  </a>
-                </div>
-              </div>
+            <div className="h-auto min-h-[3rem] md:h-20 relative flex items-start mt-2 lg:mt-4">
+              {step >= 3 && (
+                <motion.p
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5 }}
+                  className="text-base sm:text-xl md:text-2xl lg:text-2xl font-medium text-[#334155] whitespace-normal 2xl:whitespace-nowrap leading-snug tracking-tight max-w-[90%] md:max-w-none"
+                >
+                  Test any brand decision against <br className="block md:hidden" />your customers before launch.
+                </motion.p>
+              )}
             </div>
           </div>
 
-          {/* Trusted By Section (Desktop: Bottom of Left Col) */}
-          <div
-            className="hidden lg:block pt-4 border-t border-border w-full max-w-xl transition-opacity duration-1000 mt-8 mb-4"
-            style={{ opacity: step >= 3 ? 1 : 0 }}
-          >
-            <p className="text-[#334155]/80 text-xs font-bold uppercase tracking-widest mb-4">
-              Trusted by leading brands & agencies
-            </p>
-
-            <div className="relative w-full overflow-hidden [mask-image:linear-gradient(to_right,black_70%,transparent)]">
-              <div className="animate-marquee whitespace-nowrap flex gap-12 items-center w-max">
-                {["/companyLogos/nysom.png", "/companyLogos/rootLabs.png", "/companyLogos/gbk.png", "/companyLogos/celestialLights.png"]
-                  .concat(["/companyLogos/nysom.png", "/companyLogos/rootLabs.png", "/companyLogos/gbk.png", "/companyLogos/celestialLights.png"])
-                  .concat(["/companyLogos/nysom.png", "/companyLogos/rootLabs.png", "/companyLogos/gbk.png", "/companyLogos/celestialLights.png"])
-                  .concat(["/companyLogos/nysom.png", "/companyLogos/rootLabs.png", "/companyLogos/gbk.png", "/companyLogos/celestialLights.png"])
-                  .map((src, index) => {
-                    const isLarge = src.includes("gbk");
-                    return (
-                      <img
-                        key={index}
-                        src={src}
-                        alt="Brand Logo"
-                        className={`${isLarge ? "h-20 md:h-24" : "h-10 md:h-12"} object-contain inline-block shrink-0`}
-                      />
-                    );
-                  })}
+          {/* Group 2: CTA & Trusted By (Order 3 on Mobile) */}
+          <div className="order-3 flex flex-col gap-6 w-full mt-8 lg:mt-8">
+            {/* CTA Buttons */}
+            <div
+              className={`flex flex-col gap-6 transition-opacity duration-1000 ${step < 3 ? "pointer-events-none" : ""}`}
+              style={{ opacity: step >= 3 ? 1 : 0 }}
+            >
+              <div>
+                <a
+                  href="#contact"
+                  className="hidden md:inline-flex items-center justify-center px-6 py-3 md:px-8 md:py-4 text-base md:text-lg font-bold rounded-xl text-white bg-gradient-to-r from-[#236a7c] to-[#1e5b6d] hover:from-[#1e5b6d] hover:to-[#164656] transition-all duration-300 transform hover:scale-[1.02] shadow-lg hover:shadow-xl"
+                >
+                  <span className="md:hidden">Book Demo</span>
+                  <span className="hidden md:inline">Book a demo to see how</span>
+                </a>
               </div>
             </div>
-            <style jsx>{`
+
+            {/* Trusted By Section */}
+            <div
+              className="block pt-4 border-t border-border w-full max-w-xl transition-opacity duration-1000 mt-[68px] lg:mt-8 mb-4"
+              style={{ opacity: step >= 3 ? 1 : 0 }}
+            >
+              <p className="text-[#334155]/80 text-xs font-bold uppercase tracking-widest mb-4">
+                Trusted by leading brands & agencies
+              </p>
+
+              <div className="relative w-full overflow-hidden [mask-image:linear-gradient(to_right,black_70%,transparent)]">
+                <div className="animate-marquee whitespace-nowrap flex gap-12 items-center w-max">
+                  {["/companyLogos/nysom.png", "/companyLogos/rootLabs.png", "/companyLogos/gbk.png", "/companyLogos/celestialLights.png"]
+                    .concat(["/companyLogos/nysom.png", "/companyLogos/rootLabs.png", "/companyLogos/gbk.png", "/companyLogos/celestialLights.png"])
+                    .concat(["/companyLogos/nysom.png", "/companyLogos/rootLabs.png", "/companyLogos/gbk.png", "/companyLogos/celestialLights.png"])
+                    .concat(["/companyLogos/nysom.png", "/companyLogos/rootLabs.png", "/companyLogos/gbk.png", "/companyLogos/celestialLights.png"])
+                    .map((src, index) => {
+                      const isLarge = src.includes("gbk");
+                      return (
+                        <img
+                          key={index}
+                          src={src}
+                          alt="Brand Logo"
+                          className={`${isLarge ? "h-20 md:h-24" : "h-10 md:h-12"} object-contain inline-block shrink-0`}
+                        />
+                      );
+                    })}
+                </div>
+              </div>
+              <style jsx>{`
                 @keyframes marquee {
                   0% { transform: translateX(0); }
                   100% { transform: translateX(-50%); }
@@ -364,12 +358,13 @@ const Hero: React.FC = () => {
                   animation: marquee 30s linear infinite;
                 }
               `}</style>
+            </div>
           </div>
 
         </div>
 
-        {/* Right Column: Pile Animation */}
-        <div className="relative h-[320px] md:h-[500px] lg:h-full lg:min-h-[80vh] w-full flex items-center justify-center lg:justify-end overflow-visible order-2 lg:order-last pointer-events-none">
+        {/* Right Column: Pile Animation (Order 2 On Mobile) */}
+        <div className="relative h-[250px] sm:h-[320px] md:h-[500px] lg:h-full lg:min-h-[80vh] w-full flex items-center justify-center lg:justify-end overflow-visible order-2 lg:order-last pointer-events-none">
           <div ref={containerRef} className="relative w-full h-full lg:w-[120%] lg:-mr-[20%]">
             <AnimatePresence>
               {visibleArticles.map((article) => {
@@ -403,46 +398,6 @@ const Hero: React.FC = () => {
               })}
             </AnimatePresence>
           </div>
-        </div>
-
-        {/* Trusted By Section (Mobile: After News Stack) */}
-        <div
-          className="block lg:hidden pt-4 border-t border-border w-full max-w-xl transition-opacity duration-1000 mb-4 order-3 px-4 md:px-0 mt-32"
-          style={{ opacity: step >= 3 ? 1 : 0 }}
-        >
-          <p className="text-[#334155]/80 text-xs font-bold uppercase tracking-widest mb-4">
-            Trusted by top brand teams
-          </p>
-
-          <div className="relative w-full overflow-hidden [mask-image:linear-gradient(to_right,black_70%,transparent)]">
-            <div className="animate-marquee whitespace-nowrap flex gap-12 items-center w-max">
-              {["/companyLogos/nysom.png", "/companyLogos/rootLabs.png", "/companyLogos/gbk.png", "/companyLogos/celestialLights.png"]
-                .concat(["/companyLogos/nysom.png", "/companyLogos/rootLabs.png", "/companyLogos/gbk.png", "/companyLogos/celestialLights.png"])
-                .concat(["/companyLogos/nysom.png", "/companyLogos/rootLabs.png", "/companyLogos/gbk.png", "/companyLogos/celestialLights.png"])
-                .concat(["/companyLogos/nysom.png", "/companyLogos/rootLabs.png", "/companyLogos/gbk.png", "/companyLogos/celestialLights.png"])
-                .map((src, index) => {
-                  const isLarge = src.includes("gbk");
-                  return (
-                    <img
-                      key={index}
-                      src={src}
-                      alt="Brand Logo"
-                      className={`${isLarge ? "h-20 md:h-24" : "h-10 md:h-12"} object-contain inline-block shrink-0`}
-                    />
-                  );
-                })}
-            </div>
-          </div>
-          <style jsx>{`
-                @keyframes marquee {
-                  0% { transform: translateX(0); }
-                  100% { transform: translateX(-50%); }
-                }
-                .animate-marquee {
-                  display: flex;
-                  animation: marquee 30s linear infinite;
-                }
-              `}</style>
         </div>
 
       </div>
