@@ -2,6 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
+import { FLAGS } from "../lib/flags";
 
 const Navbar: React.FC = () => {
   return (
@@ -30,7 +31,7 @@ const Navbar: React.FC = () => {
             href="#contact"
             className="inline-block px-6 py-2.5 bg-gradient-to-r from-[#236a7c] to-[#1e5b6d] text-white font-bold rounded-lg hover:from-[#1e5b6d] hover:to-[#164656] shadow-md hover:shadow-lg transition-all"
           >
-            Book Demo
+            {FLAGS.SELF_SERVICE_SIGNUP ? "Get Started" : "Book Demo"}
           </motion.a>
         </li>
       </ul>
@@ -42,7 +43,7 @@ const Navbar: React.FC = () => {
         whileTap={{ scale: 0.95 }}
         className="md:hidden px-4 py-2 rounded-lg bg-gradient-to-r from-[#236a7c] to-[#1e5b6d] text-white font-bold shadow-md"
       >
-        Book Demo
+        {FLAGS.SELF_SERVICE_SIGNUP ? "Get Started" : "Book Demo"}
       </motion.a>
 
     </motion.nav>

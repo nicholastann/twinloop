@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { FLAGS } from "../lib/flags";
 
 // --- News Pile Data & Logic ---
 interface Article {
@@ -314,8 +315,8 @@ const Hero: React.FC = () => {
                   href="#contact"
                   className="hidden md:inline-flex items-center justify-center px-6 py-3 md:px-8 md:py-4 text-base md:text-lg font-bold rounded-xl text-white bg-gradient-to-r from-[#236a7c] to-[#1e5b6d] hover:from-[#1e5b6d] hover:to-[#164656] transition-all duration-300 transform hover:scale-[1.02] shadow-lg hover:shadow-xl"
                 >
-                  <span className="md:hidden">Book Demo</span>
-                  <span className="hidden md:inline">Book a demo to see how</span>
+                  <span className="md:hidden">{FLAGS.SELF_SERVICE_SIGNUP ? "Get Started" : "Book Demo"}</span>
+                  <span className="hidden md:inline">{FLAGS.SELF_SERVICE_SIGNUP ? "Get Started" : "Book a demo to see how"}</span>
                 </a>
               </div>
             </div>
@@ -401,7 +402,7 @@ const Hero: React.FC = () => {
         </div>
 
       </div>
-    </section>
+    </section >
   );
 };
 
