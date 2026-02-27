@@ -3,11 +3,13 @@ import { motion } from "framer-motion";
 import { FaEnvelope } from "react-icons/fa";
 
 interface AuthStageProps {
-    onNext: (email: string) => void;
+    onNext: (email: string, name: string) => void;
 }
 
 const AuthStage: React.FC<AuthStageProps> = ({ onNext }) => {
     const [email, setEmail] = useState("");
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
     const [loading, setLoading] = useState(false);
 
     const handleSignup = async (e: React.FormEvent) => {
@@ -16,13 +18,15 @@ const AuthStage: React.FC<AuthStageProps> = ({ onNext }) => {
 
         setLoading(true);
 
+        const fullName = (firstName || lastName) ? `${firstName}_${lastName}` : "";
+
         // Notify internal team
         try {
             await fetch('/api/contact', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    name: "New User (Self Service)",
+                    name: `${firstName} ${lastName}`.trim() || "New User (Self Service)",
                     email: email,
                     optionalMessage: "USER SIGNED UP via Email-only Flow."
                 }),
@@ -33,7 +37,7 @@ const AuthStage: React.FC<AuthStageProps> = ({ onNext }) => {
 
         setTimeout(() => {
             setLoading(false);
-            onNext(email);
+            onNext(email, fullName);
         }, 800);
     };
 
@@ -46,10 +50,26 @@ const AuthStage: React.FC<AuthStageProps> = ({ onNext }) => {
         >
             <div className="text-center space-y-2 mb-4">
                 <h3 className="text-2xl font-black text-[#0f172a] tracking-tight">Try Twinloop</h3>
-                <p className="text-[#64748b] font-medium text-sm">Enter your email to get started.</p>
+                <p className="text-[#64748b] font-medium text-sm">Enter your details to get started.</p>
             </div>
 
             <form onSubmit={handleSignup} className="space-y-4">
+                <div className="grid grid-cols-2 gap-4">
+                    <input
+                        type="text"
+                        value={firstName}
+                        onChange={(e) => setFirstName(e.target.value)}
+                        className="w-full px-5 py-4 rounded-2xl border border-gray-200 bg-[#f8fafc] text-[#0f172a] placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#236a7c] focus:border-transparent transition-all shadow-sm font-bold text-lg"
+                        placeholder="First Name"
+                    />
+                    <input
+                        type="text"
+                        value={lastName}
+                        onChange={(e) => setLastName(e.target.value)}
+                        className="w-full px-5 py-4 rounded-2xl border border-gray-200 bg-[#f8fafc] text-[#0f172a] placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#236a7c] focus:border-transparent transition-all shadow-sm font-bold text-lg"
+                        placeholder="Last Name"
+                    />
+                </div>
                 <div className="relative">
                     <input
                         type="email"
@@ -69,7 +89,7 @@ const AuthStage: React.FC<AuthStageProps> = ({ onNext }) => {
                     disabled={loading || !email.includes("@")}
                     className="cursor-pointer w-full bg-[#236a7c] hover:bg-[#1e5b6d] text-white py-4.5 rounded-2xl font-black text-xl shadow-xl shadow-[#236a7c]/20 active:scale-[0.97] transition-all disabled:opacity-70 disabled:cursor-not-allowed"
                 >
-                    {loading ? "Heading to dashboard..." : "Get Started"}
+                    {loading ? "Redirecting to Twinloop Studio..." : "Get Started"}
                 </motion.button>
             </form>
         </motion.div>
@@ -77,3 +97,4 @@ const AuthStage: React.FC<AuthStageProps> = ({ onNext }) => {
 };
 
 export default AuthStage;
+

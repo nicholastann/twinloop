@@ -3,12 +3,12 @@ import { motion, AnimatePresence } from "framer-motion";
 import AuthStage from "./AuthStage";
 
 const SelfServiceLayout: React.FC = () => {
-    const [email, setEmail] = useState("");
 
-    const handleAuthComplete = (userEmail: string) => {
-        setEmail(userEmail);
-        // Redirecting with email as a query parameter
-        window.location.href = `https://app.twinloop.ai?email=${encodeURIComponent(userEmail)}`;
+    const handleAuthComplete = (userEmail: string, userName: string) => {
+        // Redirecting with email and name (if provided) as query parameters
+        const emailParam = `email=${encodeURIComponent(userEmail)}`;
+        const nameParam = userName ? `&name=${encodeURIComponent(userName)}` : "";
+        window.location.href = `${process.env.NEXT_PUBLIC_PXSTUDIO_URL}?${emailParam}${nameParam}`;
     };
 
     const renderStage = () => {

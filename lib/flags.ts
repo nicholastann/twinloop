@@ -1,3 +1,3 @@
 export const FLAGS = {
-    SELF_SERVICE_SIGNUP: false,
+    SELF_SERVICE_SIGNUP: true,
 };
