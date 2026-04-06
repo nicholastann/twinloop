@@ -10,7 +10,7 @@ const SelfServiceLayout: React.FC = () => {
         // Redirecting with email and name (if provided) as query parameters
         const emailParam = `email=${encodeURIComponent(userEmail)}`;
         const nameParam = userName ? `&name=${encodeURIComponent(userName)}` : "";
-        window.location.href = `${url}?${emailParam}${nameParam}`;
+        window.location.href = `${process.env.NEXT_PUBLIC_PXSTUDIO_URL || url}?${emailParam}${nameParam}`;
     };
 
     const renderStage = () => {
