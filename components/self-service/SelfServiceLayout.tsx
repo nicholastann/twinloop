@@ -4,11 +4,13 @@ import AuthStage from "./AuthStage";
 
 const SelfServiceLayout: React.FC = () => {
 
+    const url = "https://deveric.dpy1vx4jrggh1.amplifyapp.com/signup"
+
     const handleAuthComplete = (userEmail: string, userName: string) => {
         // Redirecting with email and name (if provided) as query parameters
         const emailParam = `email=${encodeURIComponent(userEmail)}`;
         const nameParam = userName ? `&name=${encodeURIComponent(userName)}` : "";
-        window.location.href = `${process.env.NEXT_PUBLIC_PXSTUDIO_URL}?${emailParam}${nameParam}`;
+        window.location.href = `${url}?${emailParam}${nameParam}`;
     };
 
     const renderStage = () => {
