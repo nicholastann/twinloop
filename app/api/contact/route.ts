@@ -33,7 +33,7 @@ export async function POST(request: Request) {
 
         const mailOptions = {
             from: process.env.SMTP_FROM || process.env.SMTP_USER || '"Twinloop Contact" <noreply@twinloop.com>',
-            to: "naman@pyxis.ai",
+            to: "naman@twinloop.ai",
             subject: `New Twinloop Contact: ${name}`,
             text: `You have a new contact request from the Twinloop website.\n\nName: ${name}\nEmail: ${email}\nMessage: ${optionalMessage || 'N/A'}`,
             html: `
